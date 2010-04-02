@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView android:id="@+id/ScrollView01" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="clip_vertical">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:padding="10px"
+             android:orientation="vertical">
+<TableRow android:gravity="center_horizontal" android:paddingTop="15px">
+<TextView android:text="@string/add_media" android:id="@+id/tvNewmedia" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="center" android:textStyle="bold"></TextView>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="15px">
+<TextView android:id="@+id/tvBarcode" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/tvBarcode"></TextView>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<EditText android:text="" android:id="@+id/etBarcode" android:layout_height="wrap_content" android:width="300px" android:inputType="number|numberDecimal"></EditText>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<TextView android:text="@string/tvTitle" android:id="@+id/tvTitle" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<EditText android:text="" android:id="@+id/etTitle" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<TextView android:text="@string/tvAuthor" android:id="@+id/tvAuthor" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<EditText android:text="" android:id="@+id/etAuthor" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<TextView android:text="@string/tvMediatype" android:id="@+id/tvMediatype" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="0px">
+<Spinner android:id="@+id/spMediatype" android:layout_width="fill_parent" android:layout_height="wrap_content" android:prompt="@string/spMediatype"></Spinner>
+</TableRow>
+<TableRow android:gravity="center_horizontal" android:paddingTop="30px">
+<Button android:text="@string/btSave" android:id="@+id/btSave" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="bottom"></Button>
+</TableRow>
+</TableLayout>
+</ScrollView>
