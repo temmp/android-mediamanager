@@ -1,2 +1,0 @@
-INDEX VERSION 1.125+D:\Studium\5. Semester\Projekt Android\Code\MediaManager\branches\.metadata\.plugins\org.eclipse.jdt.core
-750099591.index

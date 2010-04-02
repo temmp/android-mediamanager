@@ -1,7 +1,0 @@
-local.mediamanager.listener
-local.mediamanager.model
-local.mediamanager.util
-local.mediamanager.util.itemlookup
-local.mediamanager.util.scan
-local.mediamanager.util.xml
-local.mediamanager.view
