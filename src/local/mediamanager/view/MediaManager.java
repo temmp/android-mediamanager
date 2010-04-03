@@ -25,6 +25,7 @@ import android.widget.Button;
 //TODO about mediamanager -> aus den activities outsourcen und url als link
 //TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
 //TODO medium verleiehen ueber scanner->searchbybarcode vorhanden
+//TODO dialoge als methode..sosnt 3x der gleich code 
 
 /**
  * Dies ist die Einstiegsactivity des MediaManagers. Von hier aus werden alle
@@ -57,8 +58,7 @@ public class MediaManager extends Activity {
 		btScanMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// ScanMedia ist die activity die gestartet wird
-				Intent in = new Intent(MediaManager.this, ScanMedia.class);
-				in.putExtra("type", ScanMedia.TYPE_ADD_MEDIA_SCAN);
+				Intent in = new Intent(MediaManager.this, AddMediaScan.class);
 				startActivity(in);
 				// Local ItemLookup Test by JL:
 				// String uri =
@@ -91,9 +91,39 @@ public class MediaManager extends Activity {
 		Button btLendMedia = (Button) findViewById(R.id.lend_media);
 		btLendMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				// LendMedia ist die activity die gestartet wird
-				Intent in = new Intent(MediaManager.this, LendMedia.class);
-				startActivity(in);
+				final String BORROW_MEDIA_TYPE = "Möchten Sie das Medium" +
+						" manuell auswählen oder durch scannen?";
+				final String BORROW_MEDIA_MANUALLY = "Manuell";
+				final String BORROW_MEDIA_BY_SCANINNG = "Scannen";
+				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						MediaManager.this);
+				builder.setMessage(BORROW_MEDIA_TYPE).setCancelable(false)
+						.setPositiveButton(BORROW_MEDIA_MANUALLY,
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										// BorrowMedia ist die activity die
+										// gestartet wird
+										Intent in = new Intent(
+												MediaManager.this,
+												LendMedia.class);
+										startActivity(in);
+									}
+								}).setNegativeButton(BORROW_MEDIA_BY_SCANINNG,
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+										// BorrowMediaScan ist die activity die
+										// gestartet wird
+										Intent in = new Intent(
+												MediaManager.this,
+												LendMediaScan.class);
+										startActivity(in);
+									}
+								});
+				builder.show();
+
 			}
 
 		});

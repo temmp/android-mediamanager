@@ -28,7 +28,7 @@ import android.widget.Toast;
  * 
  * @author Andreas Wiedemann
  */
-public class LendMedia extends Activity {
+public class LendMedia extends Activity { 
 
 	private static final int MENU_ABOUT = 0;
 	private static final int MENU_BACK = 1;

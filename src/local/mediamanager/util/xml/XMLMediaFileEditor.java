@@ -144,6 +144,7 @@ public class XMLMediaFileEditor {
 		}
 		return false;
 	}
+	
 
 	/**
 	 * Diese Methode sucht nach einem Medium mit dem uebergebenen Barcode und
@@ -230,6 +231,43 @@ public class XMLMediaFileEditor {
 	 */
 	public void updateMediaByPosition(int pos, Media media) {
 		removeMediaByPosition(pos);
+		addMedia(media);
+	}
+	
+	/**
+	 * Diese Methode updated ein Medium
+	 * 
+	 * @param barcode
+	 *            Barcode des Mediums
+	 * @param media
+	 *            Das geupdatede Medium
+	 */
+	public void updateMediaByBarcode(String barcode, Media media) {
+		// xml doc holen
+		Document doc = xmlParser.readDocumentFromFile();
+		// root element holen
+		Element root = doc.getRootElement();
+		// countervariable aktuelles medium
+		int currentElement = 0;
+		// anzahl childs des root elements im xml dokument
+		int lastElement = root.getChildCount();
+		boolean elementFound = false;
+		while (elementFound == false && currentElement < lastElement) {
+			// die vorhandenen medien werden nacheinander geholt
+			Element elem = (Element) root.getChild(currentElement);
+			// barcode des aktuellen media childs gleich der des zu loeschenden
+			// barcodes?
+			if (((Element) elem.getChild(0)).getText(0).equals(barcode)) {
+				// element gefunden also schleife beenden
+				elementFound = true;
+				// Medium loeschen
+				root.removeChild(currentElement);
+				
+			} else {
+				++currentElement;
+			}
+		}
+		// Medium mit neuem Status hinzufuegen		
 		addMedia(media);
 	}
 

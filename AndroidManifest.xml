@@ -8,15 +8,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    	<activity android:name=".view.AddMedia" android:screenOrientation="portrait"></activity>
-		<activity android:name=".view.LendMedia" android:screenOrientation="portrait"></activity>
-		<activity android:name=".view.ShowMedia" android:screenOrientation="portrait"></activity>
+    	<activity android:name=".view.AddMedia" android:screenOrientation="portrait"></activity>	
+    	<activity android:name=".view.AddMediaScan" android:screenOrientation="portrait"></activity>	
 		<activity android:name=".view.BorrowMedia" android:screenOrientation="portrait"></activity>
-		<activity android:name=".view.ScanMedia" android:screenOrientation="portrait"></activity>
+		<activity android:name=".view.BorrowMediaScan" android:screenOrientation="portrait"></activity>
+		<activity android:name=".view.LendMedia" android:screenOrientation="portrait"></activity>
+		<activity android:name=".view.LendMediaScan" android:screenOrientation="portrait"></activity>
 		<activity android:name=".view.SendSMS" android:screenOrientation="portrait"></activity>
-	<activity android:name=".view.ScanMediaNew"></activity>
-<activity android:name=".view.BorrowMediaScan"></activity>
-</application>
+		<activity android:name=".view.ScanMedia" android:screenOrientation="portrait"></activity>
+		<activity android:name=".view.ShowMedia" android:screenOrientation="portrait"></activity>
+	</application>
     <uses-sdk android:minSdkVersion="5"/>
 	<uses-permission android:name="android.permission.READ_CONTACTS"></uses-permission>
 	<uses-permission android:name="android.permission.READ_CALENDAR"></uses-permission>
