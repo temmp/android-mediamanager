@@ -26,7 +26,7 @@ public class SharedListActivity extends ListActivity {
 	// Beschriftungen Info Dialog
 	private static final String INFO_DIALOG_TITLE = "Über MediaManager 1.0";
 	private static final String INFO_DIALOG_CONTENT = "(c) 2010 by \n- Jörg Langner \n- Andreas Wiedemann \n";
-	private static final String INFO_DIALOG_URL = "<a href=\"http://code.google.com/p/android-mediamanager\";>MediaManager Projekt Homepage<br></a>";
+	private static final String INFO_DIALOG_URL = "<a href=\"http://code.google.com/p/android-mediamanager\";>MediaManager Projekt Homepage</a><br>";
 	private static final String BUTTON_LABEL = "OK";
 
 	/* Menu Items werden erstellt */
