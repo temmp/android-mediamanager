@@ -1,9 +1,8 @@
 package local.mediamanager.view;
 
 import local.mediamanager.R;
-import local.mediamanager.listener.BorrowMediaListener;
+import local.mediamanager.listener.AddMediaListener;
 import local.mediamanager.model.Media;
-import local.mediamanager.util.Contact;
 import local.mediamanager.util.itemlookup.AmazonItemLookup;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class BorrowMediaScan extends Activity {
+public class AddMediaScan extends Activity {
 
 	public final static int SCAN_REQUEST = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"
@@ -25,10 +24,10 @@ public class BorrowMediaScan extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
-		Intent in = new Intent(BorrowMediaScan.this, ScanMedia.class);
+		Intent in = new Intent(AddMediaScan.this, ScanMedia.class); 
 		startActivityForResult(in, SCAN_REQUEST);
 	}
-
+	
 	/*
 	 * wird aufgerufen wenn eine von hier gestartete ScanMedia activity beendet
 	 * wurde
@@ -46,7 +45,6 @@ public class BorrowMediaScan extends Activity {
 
 				String barcode = data.getStringExtra("barcode");
 				String uri = AmazonItemLookup.createRequestURL(barcode);
-				//TODO media ueberall nicht mehr final
 				final Media media = AmazonItemLookup.fetchMedia(uri);
 
 				progressDialog.dismiss();
@@ -58,8 +56,8 @@ public class BorrowMediaScan extends Activity {
 					// Verfuegung und der ProgressDialog wird geschlossen
 					progressDialog.dismiss();
 
-					// Layout BorrowMedia
-					setContentView(R.layout.borrowmedia);
+					// Layout AddMedia
+					setContentView(R.layout.addmedia);
 
 					// Medieneingenschaften in die GUI eintragen
 					EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
@@ -76,18 +74,9 @@ public class BorrowMediaScan extends Activity {
 					spinnerAdapter.add(media.getType());
 					spMediatype.setAdapter(spinnerAdapter);
 
-					// Spinner "Medium entleihen an" mit Kontaktliste füllen
-					Spinner spLegalOwner = (Spinner) findViewById(R.id.spLegalOwner);
-					Contact contactNameList = new Contact(this);
-					ArrayAdapter<CharSequence> contactAdapter = new ArrayAdapter<CharSequence>(
-							this, android.R.layout.simple_spinner_item,
-							contactNameList.getContactNameList());
-					spLegalOwner.setAdapter(contactAdapter);
-
 					// "Medium anlegen" Button
-					Button btBorrowSave = (Button) findViewById(R.id.btBorrowSave);
-					btBorrowSave.setOnClickListener(new BorrowMediaListener(
-							this));
+					Button btSave = (Button) findViewById(R.id.btSave);
+					btSave.setOnClickListener(new AddMediaListener(this));
 				} else {
 					// Barcode wurde bei Amazon nicht gefunden
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -96,7 +85,12 @@ public class BorrowMediaScan extends Activity {
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog, int id) {
-											BorrowMediaScan.this.finish();
+											setResult(Activity.RESULT_CANCELED);
+											AddMediaScan.this.finish();
+											// jetzt wird die onActivityResult
+											// Methode
+											// der aufrufenden
+											// Actitvity aufgerufen
 										}
 									});
 					AlertDialog alert = builder.create();
@@ -108,9 +102,8 @@ public class BorrowMediaScan extends Activity {
 				// Activity dem Benutzer gezeigt..daher ist hier nichts zu tun
 				this.finish();
 			}
-			break;
 		default:
 			break;
 		}
-	}
+	}	
 }
