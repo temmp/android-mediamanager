@@ -20,7 +20,6 @@ import android.widget.Button;
 //TODO Calender einbauen..was ist mit Calendereintrag loeschen bei...
 //zurueckmelden? soll der eintrag automatisch erstellt werden?
 //Zudem ist im Calender code eine for schleife die von 0 bis 1 laeuft?
-//TODO about mediamanager -> url als link
 //TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
 //TODO medium verleiehen ueber scanner->searchbybarcode vorhanden
 
