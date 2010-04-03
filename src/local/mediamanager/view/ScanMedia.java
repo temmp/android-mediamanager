@@ -2,13 +2,14 @@ package local.mediamanager.view;
 
 import local.mediamanager.util.scan.ScanIntentIntegrator;
 import local.mediamanager.util.scan.ScanResult;
+import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class ScanMedia extends Activity {
+public class ScanMedia extends SharedActivity {
 
 	// Konstanten fuer die Fehlermeldungen
 	private final String MEDIA_SCAN_ABORTED = "Scan Vorgang abgebrochen.";

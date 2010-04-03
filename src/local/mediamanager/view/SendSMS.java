@@ -6,6 +6,7 @@ import local.mediamanager.R;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
+import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -24,7 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
-public class SendSMS extends Activity {
+public class SendSMS extends SharedActivity {
 
 	// Beschriftungen der GUI und dessen Elemente
 	private final String TEXTVIEW_SELECT_TEL_NUMBER_TITLE = "Wählen sie eine Telefonnummer"

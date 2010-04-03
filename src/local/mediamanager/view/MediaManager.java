@@ -7,13 +7,11 @@ import java.io.IOException;
 import local.mediamanager.R;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
 import local.mediamanager.util.xml.XMLSerializer;
-import android.app.Activity;
+import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,10 +33,7 @@ import android.widget.Button;
  * @author Andreas Wiedemann
  * @author Joerg Langner
  */
-public class MediaManager extends Activity {
-
-	private static final int MENU_ABOUT = 0;
-	private static final int MENU_BACK = 1;
+public class MediaManager extends SharedActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -165,39 +160,5 @@ public class MediaManager extends Activity {
 				builder.show();
 			}
 		});
-	}
-
-	/* Menu Items werden erstellt */
-	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_ABOUT, 0, "Info").setIcon(R.drawable.about);
-		menu.add(0, MENU_BACK, 0, "Beenden").setIcon(R.drawable.end);
-		return true;
-	}
-
-	/* Wird aufgerufen wenn ein Menuitem ausgewaehlt wird */
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case MENU_ABOUT:
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setIcon(R.drawable.icon);
-			builder.setTitle("Über MediaManager 1.0");
-			builder
-					.setMessage("(c) 2010 by \n- Jörg Langner \n- Andreas Wiedemann \n\n"
-							+ "http://code.google.com/p/android-mediamanager");
-			builder.setCancelable(false);
-			builder.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			AlertDialog alert = builder.create();
-			alert.show();
-			return true;
-		case MENU_BACK:
-			this.finish();
-			return true;
-		}
-		return false;
 	}
 }

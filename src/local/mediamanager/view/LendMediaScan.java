@@ -8,6 +8,7 @@ import local.mediamanager.util.Contact;
 import local.mediamanager.util.Date;
 import local.mediamanager.util.itemlookup.AmazonItemLookup;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
+import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,7 +24,7 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class LendMediaScan extends Activity {
+public class LendMediaScan extends SharedActivity {
 
 	// TODO public ueberall -> fixen 
 	public final static int SCAN_REQUEST = 0;
