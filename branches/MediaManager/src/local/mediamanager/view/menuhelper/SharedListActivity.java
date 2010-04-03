@@ -1,11 +1,17 @@
 package local.mediamanager.view.menuhelper;
 
 import local.mediamanager.R;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class SharedListActivity extends ListActivity {
 
@@ -19,9 +25,9 @@ public class SharedListActivity extends ListActivity {
 
 	// Beschriftungen Info Dialog
 	private static final String INFO_DIALOG_TITLE = "Über MediaManager 1.0";
-	private static final String INFO_DIALOG_CONTENT = "(c) 2010 by \n- Jörg"
-			+ " Langner \n- Andreas Wiedemann \n\n"
-			+ "http://code.google.com/p/android-mediamanager";
+	private static final String INFO_DIALOG_CONTENT = "(c) 2010 by \n- Jörg Langner \n- Andreas Wiedemann \n";
+	private static final String INFO_DIALOG_URL = "<a href=\"http://code.google.com/p/android-mediamanager\";>MediaManager Projekt Homepage<br></a>";
+	private static final String BUTTON_LABEL = "OK";
 
 	/* Menu Items werden erstellt */
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -34,19 +40,35 @@ public class SharedListActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case MENU_ABOUT:
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-			builder.setIcon(R.drawable.icon);
-			builder.setTitle(INFO_DIALOG_TITLE);
-			builder.setMessage(INFO_DIALOG_CONTENT);
-			builder.setCancelable(false);
-			builder.setPositiveButton("OK",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog, int id) {
-							dialog.cancel();
-						}
-					});
-			AlertDialog alert = builder.create();
-			alert.show();
+			// Dialog
+			final Dialog dialog = new Dialog(this);
+			dialog.setTitle(INFO_DIALOG_TITLE);
+			// Dialog Layout
+			LinearLayout layout = new LinearLayout(this);
+			layout.setOrientation(LinearLayout.VERTICAL);
+			// Textinhalt des Dialogs
+			TextView content = new TextView(this);
+			content.setText(INFO_DIALOG_CONTENT);
+			// klickbarer Link im Dialog
+			TextView link = new TextView(this);
+			link.setText(Html.fromHtml(INFO_DIALOG_URL));
+			link.setMovementMethod(LinkMovementMethod.getInstance());
+			// OK Button
+			Button btOK = new Button(this);
+			btOK.setText(BUTTON_LABEL);
+			btOK.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					// der Dialog wird geschlossen
+					dialog.dismiss();
+				}
+			});
+			layout.addView(content);
+			layout.addView(link);			
+			layout.addView(btOK);
+			dialog.setContentView(layout);
+			dialog.setOwnerActivity(this);
+			dialog.show();
 			return true;
 		case MENU_BACK:
 			this.finish();
