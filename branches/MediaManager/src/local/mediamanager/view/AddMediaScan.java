@@ -4,6 +4,7 @@ import local.mediamanager.R;
 import local.mediamanager.listener.AddMediaListener;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.itemlookup.AmazonItemLookup;
+import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,7 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class AddMediaScan extends Activity {
+public class AddMediaScan extends SharedActivity {
 
 	public final static int SCAN_REQUEST = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"

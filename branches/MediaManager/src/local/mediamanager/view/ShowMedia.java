@@ -8,14 +8,11 @@ import local.mediamanager.R;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
-import android.app.AlertDialog;
+import local.mediamanager.view.menuhelper.SharedListActivity;
 import android.app.Dialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -40,7 +37,8 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * 
  * @author Jörg Langner
  */
-public class ShowMedia extends ListActivity {
+public class ShowMedia extends SharedListActivity {
+	
 	// enum fuer die Filterart
 	private enum FILTER {
 		SHOW_ALL_MEDIA(0, "Alle Medien anzeigen"), SHOW_LENT_MEDIA(1,
@@ -63,10 +61,6 @@ public class ShowMedia extends ListActivity {
 			return this.text;
 		}
 	}
-
-	private static final int MENU_ABOUT = 0;
-
-	private static final int MENU_BACK = 1;
 
 	// Bezeichnungen fuer das Kontext Menue
 	private final String SMS_ENTRY = "SMS";
@@ -383,36 +377,5 @@ public class ShowMedia extends ListActivity {
 			xmlEditor.removeMediaByPosition(selectedMedia);
 			Toast.makeText(this, MEDIA_IS_BACK, Toast.LENGTH_LONG).show();
 		}
-	}
-	
-	/* Creates the menu items */
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    menu.add(0, MENU_ABOUT, 0, "Info").setIcon(R.drawable.about);
-	    menu.add(0, MENU_BACK, 0, "Zurück").setIcon(R.drawable.end);
-	    return true;
-	}
-
-	/* Handles item selections */
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    case MENU_ABOUT:
-	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    	builder.setIcon(R.drawable.icon);
-	    	builder.setTitle("Über MediaManager 1.0");
-	    	builder.setMessage("(c) 2010 by \n- Jörg Langner \n- Andreas Wiedemann \n\n" + "http://code.google.com/p/android-mediamanager");
-	    	builder.setCancelable(false);
-	    	builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	    				public void onClick(DialogInterface dialog, int id) {
-	    					dialog.cancel();
-	    	           }
-	    	       });
-	    	AlertDialog alert = builder.create();
-	    	alert.show();
-	        return true;
-	    case MENU_BACK:
-	        this.finish();
-	        return true;
-	    }
-	    return false;
 	}
 }
