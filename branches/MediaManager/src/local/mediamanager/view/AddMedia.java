@@ -22,9 +22,6 @@ public class AddMedia extends SharedActivity {
 	// Spinner
 	private Spinner spMediatype;
 
-	// Intent request code
-	public static final int ADD_MEDIA_REQUEST_CODE = 0;
-
 	// Intent extra namen
 	public static final String BARCODE = "barcode";
 	public static final String TITLE = "title";
