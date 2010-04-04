@@ -52,7 +52,6 @@ public class LendMediaScanListener implements OnClickListener {
 				spLendto.getSelectedItemPosition()).toString());
 		media.setDate(date);
 		media.setStatus(Media.STATUS.VERLIEHEN.getName());
-		media.setLegalOwner(Media.DEFAULT_LEGAL_OWNER);
 		// Medium updaten
 		xmlEditor.updateMediaByBarcode(barcode, media);
 		Context context = activity.getApplicationContext();

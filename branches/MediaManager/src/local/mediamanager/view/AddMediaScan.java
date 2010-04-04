@@ -26,7 +26,7 @@ import android.widget.Spinner;
  */
 public class AddMediaScan extends SharedActivity {
 
-	private final static int SCAN_REQUEST_CODE = 0;
+	private final int SCAN_REQUEST_CODE = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"
 			+ " werden.";
 
@@ -52,7 +52,7 @@ public class AddMediaScan extends SharedActivity {
 				ProgressDialog progressDialog = ProgressDialog.show(this, "",
 						"Bitte warten...", true);
 
-				String barcode = data.getStringExtra("barcode");
+				String barcode = data.getStringExtra(ScanMedia.BARCODE_EXTRA);
 				String uri = AmazonItemLookup.createRequestURL(barcode);
 				final Media media = AmazonItemLookup.fetchMedia(uri);
 

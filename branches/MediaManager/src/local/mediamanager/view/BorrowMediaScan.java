@@ -29,7 +29,8 @@ import android.widget.Spinner;
  */
 public class BorrowMediaScan extends SharedActivity {
 
-	private final static int SCAN_REQUEST_CODE = 0;
+	// Requestcode fuer Scannen
+	private final int SCAN_REQUEST_CODE = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"
 			+ " werden und muss daher manuell angelegt werden.";
 
@@ -58,10 +59,9 @@ public class BorrowMediaScan extends SharedActivity {
 				ProgressDialog progressDialog = ProgressDialog.show(this, "",
 						"Bitte warten...", true);
 
-				barcode = data.getStringExtra("barcode");
+				barcode = data.getStringExtra(ScanMedia.BARCODE_EXTRA);
 				String uri = AmazonItemLookup.createRequestURL(barcode);
-				// TODO media ueberall nicht mehr final
-				final Media media = AmazonItemLookup.fetchMedia(uri);
+				Media media = AmazonItemLookup.fetchMedia(uri);
 
 				progressDialog.dismiss();
 
