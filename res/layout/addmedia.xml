@@ -9,25 +9,25 @@
 <TextView android:text="@string/add_media" android:id="@+id/tvNewmedia" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_gravity="center" android:textStyle="bold"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="15px">
-<TextView android:id="@+id/tvBarcode" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/tvBarcode"></TextView>
+<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/tvBarcode"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <EditText android:text="" android:id="@+id/etBarcode" android:layout_height="wrap_content" android:width="300px" android:inputType="number|numberDecimal"></EditText>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
-<TextView android:text="@string/tvTitle" android:id="@+id/tvTitle" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+<TextView android:text="@string/tvTitle" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <EditText android:text="" android:id="@+id/etTitle" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
-<TextView android:text="@string/tvAuthor" android:id="@+id/tvAuthor" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+<TextView android:text="@string/tvAuthor" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <EditText android:text="" android:id="@+id/etAuthor" android:layout_width="fill_parent" android:layout_height="wrap_content"></EditText>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
-<TextView android:text="@string/tvMediatype" android:id="@+id/tvMediatype" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+<TextView android:text="@string/tvMediatype" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <Spinner android:id="@+id/spMediatype" android:layout_width="fill_parent" android:layout_height="wrap_content" android:prompt="@string/spMediatype"></Spinner>
