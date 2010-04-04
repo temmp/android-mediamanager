@@ -38,7 +38,7 @@ import android.widget.Spinner;
 public class LendMediaScan extends SharedActivity {
 
 	// Request Code fuer Scannen
-	private final static int SCAN_REQUEST_CODE = 0;
+	private final int SCAN_REQUEST_CODE = 0;
 	// Request Code fuer AddMedia
 	private static final int ADD_MEDIA_REQUEST_CODE = 1;
 
@@ -73,7 +73,7 @@ public class LendMediaScan extends SharedActivity {
 				// Layout LendMedia
 				setContentView(R.layout.lendmedia);
 				// der ermittelte Barcode
-				barcode = data.getStringExtra("barcode");
+				barcode = data.getStringExtra(ScanMedia.BARCODE_EXTRA);
 				// ueberpruefen ob barcode in der xml datei vorhanden ist
 				Media media = new XMLMediaFileEditor(this)
 						.getMediaByBarcode(barcode);

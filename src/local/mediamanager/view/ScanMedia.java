@@ -11,6 +11,11 @@ import android.os.Bundle;
 
 public class ScanMedia extends SharedActivity {
 
+	/**
+	 * Intent Extra Barcode
+	 */
+	public static String BARCODE_EXTRA = "barcode";
+	
 	// Konstanten fuer die Fehlermeldungen
 	private final String MEDIA_SCAN_ABORTED = "Scan Vorgang abgebrochen.";
 	private final String BARCODE_NOT_SCANNED = "Barcode konnte nicht gescannt werden.";
@@ -41,7 +46,7 @@ public class ScanMedia extends SharedActivity {
 		if (scanResult != null) {
 			if (scanResult.getBarcode() != null) {
 				Intent setText = new Intent();
-				setText.putExtra("barcode", scanResult.getBarcode());
+				setText.putExtra(BARCODE_EXTRA, scanResult.getBarcode());
 				setResult(Activity.RESULT_OK, setText);
 				ScanMedia.this.finish();
 				// jetzt wird die onActivityResult Methode der aufrufenden

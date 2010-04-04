@@ -47,6 +47,7 @@ public class AddMediaListener implements OnClickListener {
 		XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(activity);
 		xmlEditor.addMedia(media);
 
+		// Nachricht an Benutzer das Medium erfolgreich hinzugefuegt wurde
 		Context context = activity.getApplicationContext();
 		Toast.makeText(context, MEDIA_SUCCESSFULLY_ADDED, Toast.LENGTH_SHORT)
 				.show();

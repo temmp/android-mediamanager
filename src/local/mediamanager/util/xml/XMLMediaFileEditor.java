@@ -183,8 +183,9 @@ public class XMLMediaFileEditor {
 				media.setAuthor(((Element) elem.getChild(2)).getText(0));
 				media.setStatus(((Element) elem.getChild(3)).getText(0));
 				Element statusChild = (Element) elem.getChild(3);
-				media.setOwner(statusChild.getAttributeValue(0));
-				media.setDate(statusChild.getAttributeValue(1));
+				media.setLegalOwner(statusChild.getAttributeValue(0));
+				media.setOwner(statusChild.getAttributeValue(1));
+				media.setDate(statusChild.getAttributeValue(2));
 			} else {
 				++currentElement;
 			}
