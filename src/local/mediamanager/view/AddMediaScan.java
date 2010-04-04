@@ -16,19 +16,27 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Activity zum Anlegen eines Mediums per Scannen. Mit dem eingescannten Barcode
+ * wird ein ItemLookup bei Amazon gemacht und die ermittelten Werte in die GUi
+ * eingetragen. Der Benutzer braucht dann nur noch den Button zum anlegen des
+ * Mediums druecken.
+ * 
+ * @author Joerg Langner
+ */
 public class AddMediaScan extends SharedActivity {
 
-	public final static int SCAN_REQUEST = 0;
+	private final static int SCAN_REQUEST_CODE = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"
 			+ " werden.";
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
-		Intent in = new Intent(AddMediaScan.this, ScanMedia.class); 
-		startActivityForResult(in, SCAN_REQUEST);
+		Intent in = new Intent(AddMediaScan.this, ScanMedia.class);
+		startActivityForResult(in, SCAN_REQUEST_CODE);
 	}
-	
+
 	/*
 	 * wird aufgerufen wenn eine von hier gestartete ScanMedia activity beendet
 	 * wurde
@@ -36,7 +44,7 @@ public class AddMediaScan extends SharedActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// ueberpruefen von welcher Activity der callback kommt
 		switch (requestCode) {
-		case SCAN_REQUEST:
+		case SCAN_REQUEST_CODE:
 			if (resultCode == Activity.RESULT_OK) {
 				// Progress Dialog starten, da die Anfrage an Amazon und deren
 				// Antwort (das XML Dokument) ein paar Sekunden dauern kann.
@@ -89,8 +97,7 @@ public class AddMediaScan extends SharedActivity {
 											setResult(Activity.RESULT_CANCELED);
 											AddMediaScan.this.finish();
 											// jetzt wird die onActivityResult
-											// Methode
-											// der aufrufenden
+											// Methode der aufrufenden
 											// Actitvity aufgerufen
 										}
 									});
@@ -106,5 +113,5 @@ public class AddMediaScan extends SharedActivity {
 		default:
 			break;
 		}
-	}	
+	}
 }
