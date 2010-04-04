@@ -50,6 +50,8 @@ public class AddMediaListener implements OnClickListener {
 		Context context = activity.getApplicationContext();
 		Toast.makeText(context, MEDIA_SUCCESSFULLY_ADDED, Toast.LENGTH_SHORT)
 				.show();
+		// Resultat des Medium anlegens
+		activity.setResult(Activity.RESULT_OK);
 		// activity wird geschlossen
 		activity.finish();
 	}

@@ -5,6 +5,7 @@ import local.mediamanager.listener.AddMediaListener;
 import local.mediamanager.view.menuhelper.SharedActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,16 +15,17 @@ import android.widget.Spinner;
 /**
  * GUI zum manuellen Hinzufuegen eines Mediums.
  * 
- * @author Andreas Wiedemann 
+ * @author Andreas Wiedemann
  */
 public class AddMedia extends SharedActivity {
 
 	// Spinner
 	private Spinner spMediatype;
 
+	// Intent request code
+	public static final int ADD_MEDIA_REQUEST_CODE = 0;
+
 	// Intent extra namen
-	public static final String NAME_OF_EXTRA_DATA = "scanned";
-	public static final String VALUE_OF_EXTRA_DATA = "true";
 	public static final String BARCODE = "barcode";
 	public static final String TITLE = "title";
 	public static final String AUTHOR = "author";
@@ -32,24 +34,23 @@ public class AddMedia extends SharedActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.addmedia);
-
 		spMediatype = (Spinner) findViewById(R.id.spMediatype);
 
 		Intent in = getIntent();
-		String text = in.getStringExtra(NAME_OF_EXTRA_DATA);
-		// es wurde ein Intent mit den Medieneigenschaften durch die aufrufende
-		// Activity mitgegeben
-		if (text != null && text.equals(VALUE_OF_EXTRA_DATA)) {
-			// Medieneingenschaften in die GUI eintragen
+		if (in.getStringExtra(BARCODE) != null) {
 			EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
-			etBarcode.setText(in.getStringExtra(in
-					.getStringExtra(BARCODE)));
+			etBarcode.setText(in.getStringExtra(BARCODE));
+		}
+		if (in.getStringExtra(TITLE) != null) {
 			EditText etTitle = (EditText) findViewById(R.id.etTitle);
-			etTitle.setText(in
-					.getStringExtra(in.getStringExtra(TITLE)));
+			etTitle.setText(in.getStringExtra(TITLE));
+		}
+		if (in.getStringExtra(AUTHOR) != null) {
 			EditText etAuthor = (EditText) findViewById(R.id.etAuthor);
-			etAuthor.setText(in.getStringExtra(in
-					.getStringExtra(AUTHOR)));
+			etAuthor.setText(in.getStringExtra(AUTHOR));
+		}
+		if (in.getStringExtra(TYPE) != null) {
+			Log.i("log", "ungleich null");
 			spMediatype.setEnabled(false);
 			ArrayAdapter<CharSequence> spinnerAdapter;
 			spinnerAdapter = new ArrayAdapter<CharSequence>(this,
@@ -57,9 +58,9 @@ public class AddMedia extends SharedActivity {
 			spinnerAdapter.add(in.getStringExtra(TYPE));
 			spMediatype.setAdapter(spinnerAdapter);
 		}
-		// es wurden keine Medienionformation durch die aufrufende Activity
-		// mitgegeben
-		else {
+		if(in.getStringExtra(TYPE) == null) {
+			// wenn kein typ durch die aufrufende activity uebergeben wurde dann
+			// wird der spinner mit allen verfuegbaren medientypen gefuellt
 			ArrayAdapter<CharSequence> adapter = ArrayAdapter
 					.createFromResource(this, R.array.mediatypes,
 							android.R.layout.simple_spinner_item);
