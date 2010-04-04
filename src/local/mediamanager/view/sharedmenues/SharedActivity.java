@@ -1,8 +1,8 @@
-package local.mediamanager.view.menuhelper;
+package local.mediamanager.view.sharedmenues;
 
 import local.mediamanager.R;
+import android.app.Activity;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SharedListActivity extends ListActivity {
+public class SharedActivity extends Activity {
 
 	// Menu Optionen
 	private static final int MENU_ABOUT = 0;

@@ -8,7 +8,7 @@ import local.mediamanager.listener.LendMediaListener;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;

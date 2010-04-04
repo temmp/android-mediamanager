@@ -7,8 +7,8 @@ import java.io.IOException;
 import local.mediamanager.R;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
 import local.mediamanager.util.xml.XMLSerializer;
-import local.mediamanager.view.menuhelper.SharedActivity;
 import local.mediamanager.view.shareddialogs.MediaManagerSharedDialog;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -98,10 +98,10 @@ public class MediaManager extends SharedActivity {
 		Button btLendMedia = (Button) findViewById(R.id.lend_media);
 		btLendMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				// Intent fuer manuelles anlegen eines Mediums
+				// Intent fuer manuelles verleihen eines Mediums
 				Intent manualIntent = new Intent(MediaManager.this,
 						LendMedia.class);
-				// Intent fuer das Anlegen eines Mediums per scannen
+				// Intent fuer das verleihen eines Mediums per scannen
 				Intent scanIntent = new Intent(MediaManager.this,
 						LendMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
@@ -115,10 +115,10 @@ public class MediaManager extends SharedActivity {
 		Button btBorrowMedia = (Button) findViewById(R.id.borrow_media);
 		btBorrowMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				// Intent fuer manuelles anlegen eines Mediums
+				// Intent fuer manuelles entleihen eines Mediums
 				Intent manualIntent = new Intent(MediaManager.this,
 						BorrowMedia.class);
-				// Intent fuer das Anlegen eines Mediums per scannen
+				// Intent fuer das Entleihen eines Mediums per scannen
 				Intent scanIntent = new Intent(MediaManager.this,
 						BorrowMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen

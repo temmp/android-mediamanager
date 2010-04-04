@@ -2,7 +2,7 @@ package local.mediamanager.view;
 
 import local.mediamanager.util.scan.ScanIntentIntegrator;
 import local.mediamanager.util.scan.ScanResult;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
