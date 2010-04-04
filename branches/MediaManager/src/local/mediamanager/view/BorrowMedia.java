@@ -3,7 +3,7 @@ package local.mediamanager.view;
 import local.mediamanager.R;
 import local.mediamanager.listener.BorrowMediaListener;
 import local.mediamanager.util.Contact;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;

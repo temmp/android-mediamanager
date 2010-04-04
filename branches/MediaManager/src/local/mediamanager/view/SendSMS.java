@@ -6,7 +6,7 @@ import local.mediamanager.R;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;

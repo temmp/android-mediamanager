@@ -5,7 +5,7 @@ import local.mediamanager.listener.BorrowMediaListener;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.itemlookup.AmazonItemLookup;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

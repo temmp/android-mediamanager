@@ -2,7 +2,7 @@ package local.mediamanager.view;
 
 import local.mediamanager.R;
 import local.mediamanager.listener.AddMediaListener;
-import local.mediamanager.view.menuhelper.SharedActivity;
+import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

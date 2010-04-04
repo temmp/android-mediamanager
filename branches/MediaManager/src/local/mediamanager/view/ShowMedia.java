@@ -8,7 +8,7 @@ import local.mediamanager.R;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
-import local.mediamanager.view.menuhelper.SharedListActivity;
+import local.mediamanager.view.sharedmenues.SharedListActivity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
