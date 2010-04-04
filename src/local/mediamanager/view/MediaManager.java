@@ -42,14 +42,14 @@ public class MediaManager extends SharedActivity {
 
 	// Textinhalt des Dialog
 	private final String DIALOG_TEXT_ADD_MEDIA = "Wie möchten Sie das Medium anlegen?";
-	private final String DIALOG_TEXT_LEND_MEDIA = "Möchten Sie das Medium, welches verliehen"
-			+ " werden soll, manuell Auswählen oder durch scannen?";
-	private final String DIALOG_TEXT_BORROW_MEDIA = "Möchten Sie das Medium, welches entliehen"
-			+ " werden soll, manuell Auswählen oder durch scannen?";
+	private final String DIALOG_TEXT_LEND_MEDIA = "Möchten Sie das Medium manuell oder per scannen verleihen?";
+	private final String DIALOG_TEXT_BORROW_MEDIA = "Möchten Sie das Medium manuell oder per scannen entleihen?";
+	private final String DIALOG_TEXT_GIVE_MEDIA_BACK = "Möchten Sie das Medium manuell oder per scannen zurückmelden?";
 	// Beschriftungen der Titel des Dialogs
 	private final String DIALOG_TITLE_ADD_MEDIA = "Medium anlegen";
 	private final String DIALOG_TITLE_LEND_MEDIA = "Medium verleihen";
 	private final String DIALOG_TITLE_BORROW_MEDIA = "Medium entleihen";
+	private final String DIALOG_TITLE_GIVE_MEDIA_BACK = "Medium zurückmelden";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,8 @@ public class MediaManager extends SharedActivity {
 						AddMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
 				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
-						scanIntent, DIALOG_TEXT_ADD_MEDIA, DIALOG_TITLE_ADD_MEDIA).show();
+						scanIntent, DIALOG_TEXT_ADD_MEDIA,
+						DIALOG_TITLE_ADD_MEDIA).show();
 			}
 
 		});
@@ -106,7 +107,8 @@ public class MediaManager extends SharedActivity {
 						LendMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
 				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
-						scanIntent, DIALOG_TEXT_LEND_MEDIA, DIALOG_TITLE_LEND_MEDIA).show();
+						scanIntent, DIALOG_TEXT_LEND_MEDIA,
+						DIALOG_TITLE_LEND_MEDIA).show();
 			}
 
 		});
@@ -123,7 +125,25 @@ public class MediaManager extends SharedActivity {
 						BorrowMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
 				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
-						scanIntent, DIALOG_TEXT_BORROW_MEDIA, DIALOG_TITLE_BORROW_MEDIA).show();
+						scanIntent, DIALOG_TEXT_BORROW_MEDIA,
+						DIALOG_TITLE_BORROW_MEDIA).show();
+			}
+		});
+
+		//Button zum zurückmelden eines Mediums
+		Button btGiveMediaBack = (Button) findViewById(R.id.give_media_back);
+		btGiveMediaBack.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				// Intent fuer manuelles entleihen eines Mediums
+				Intent manualIntent = new Intent(MediaManager.this,
+						GiveMediaBack.class);
+				// Intent fuer das Entleihen eines Mediums per scannen
+				Intent scanIntent = new Intent(MediaManager.this,
+						GiveMediaBackScan.class);
+				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
+				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
+						scanIntent, DIALOG_TEXT_GIVE_MEDIA_BACK,
+						DIALOG_TITLE_GIVE_MEDIA_BACK).show();
 			}
 		});
 	}
