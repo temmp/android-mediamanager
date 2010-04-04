@@ -17,17 +17,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/**
+ * Activity zum Entleihen eines Mediums per Scannen. Mit dem eingescannten
+ * Barcode wird ein ItemLookup bei Amazon gemacht. Wurde das Medium von Amazon
+ * gefunden werden die ermittelten Informationen ueber das Medium in die GUI
+ * eingetragen. Wird das MEdium nicht von Amazon gefunden so wird die
+ * BorrowMedia Activity aufgerufen in welche die Medieninformationen selber per
+ * Hand eingetragen werden muessen.
+ * 
+ * @author Joerg Langner
+ */
 public class BorrowMediaScan extends SharedActivity {
 
-	public final static int SCAN_REQUEST = 0;
+	private final static int SCAN_REQUEST_CODE = 0;
 	private final String MEDIA_NOT_FOUND = "Das Medium konnte von Amazon nicht gefunden"
-			+ " werden.";
+			+ " werden und muss daher manuell angelegt werden.";
+
+	// der eingescannte barcode
+	private String barcode;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
 		Intent in = new Intent(BorrowMediaScan.this, ScanMedia.class);
-		startActivityForResult(in, SCAN_REQUEST);
+		startActivityForResult(in, SCAN_REQUEST_CODE);
 	}
 
 	/*
@@ -37,7 +50,7 @@ public class BorrowMediaScan extends SharedActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// ueberpruefen von welcher Activity der callback kommt
 		switch (requestCode) {
-		case SCAN_REQUEST:
+		case SCAN_REQUEST_CODE:
 			if (resultCode == Activity.RESULT_OK) {
 				// Progress Dialog starten, da die Anfrage an Amazon und deren
 				// Antwort (das XML Dokument) ein paar Sekunden dauern kann.
@@ -45,9 +58,9 @@ public class BorrowMediaScan extends SharedActivity {
 				ProgressDialog progressDialog = ProgressDialog.show(this, "",
 						"Bitte warten...", true);
 
-				String barcode = data.getStringExtra("barcode");
+				barcode = data.getStringExtra("barcode");
 				String uri = AmazonItemLookup.createRequestURL(barcode);
-				//TODO media ueberall nicht mehr final
+				// TODO media ueberall nicht mehr final
 				final Media media = AmazonItemLookup.fetchMedia(uri);
 
 				progressDialog.dismiss();
@@ -93,10 +106,16 @@ public class BorrowMediaScan extends SharedActivity {
 					// Barcode wurde bei Amazon nicht gefunden
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
 					builder.setMessage(MEDIA_NOT_FOUND).setCancelable(false)
-							.setNeutralButton("Ok",
+							.setNeutralButton("Weiter",
 									new DialogInterface.OnClickListener() {
 										public void onClick(
 												DialogInterface dialog, int id) {
+											Intent in = new Intent(
+													BorrowMediaScan.this,
+													BorrowMedia.class);
+											in.putExtra(BorrowMedia.BARCODE,
+													barcode);
+											startActivity(in);
 											BorrowMediaScan.this.finish();
 										}
 									});
