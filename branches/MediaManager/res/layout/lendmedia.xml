@@ -10,21 +10,21 @@
 </TableRow>
 
 <TableRow android:gravity="center_horizontal" android:paddingTop="15px">
-<TextView android:text="@string/tvMedia" android:id="@+id/tvMedia" android:layout_width="fill_parent" android:layout_height="wrap_content" android:width="300px"></TextView>
+<TextView android:text="@string/tvMedia" android:layout_width="fill_parent" android:layout_height="wrap_content" android:width="300px"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <Spinner android:id="@+id/spMedia" android:layout_width="fill_parent" android:layout_height="wrap_content" android:prompt="@string/spMedia"></Spinner>
 </TableRow>
 
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
-<TextView android:text="@string/tvLendto" android:id="@+id/tvLendto" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+<TextView android:text="@string/tvLendto" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
 <Spinner android:id="@+id/spLendto" android:layout_width="fill_parent" android:layout_height="wrap_content" android:prompt="@string/spLendto"></Spinner>
 </TableRow>
 
 <TableRow android:gravity="center_horizontal" android:paddingTop="0px">
-<TextView android:text="@string/tvLendtime" android:id="@+id/tvLendtime" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
+<TextView android:text="@string/tvLendtime" android:layout_width="fill_parent" android:layout_height="wrap_content"></TextView>
 </TableRow>
 <TableRow android:gravity="center_horizontal" android:paddingTop="5px">
 <DatePicker android:id="@+id/dpLendtime" android:layout_width="wrap_content" android:layout_height="wrap_content"></DatePicker>
