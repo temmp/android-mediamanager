@@ -6,7 +6,7 @@
 	<string name="borrow_media">Medium entleihen</string>
 	<string name="lend_media">Medium verleihen</string>
 	<string name="show_media">Medien anzeigen</string>
-	<string name="tvBarcode">Barcode:</string>
+	<string name="give_media_back">Medium zurückmelden</string><string name="tvBarcode">Barcode:</string>
 	<string name="tvTitle">Medientitel:</string>
 	<string name="tvAuthor">Medienautor:</string>
 	<string name="tvMediatype">Medientyp:</string>
@@ -17,15 +17,18 @@
 	<string name="tvLendtime">Medium entleihen bis:</string>
 	<string name="tvBorrowMedia">Entliehenes Medium anlegen</string>
 	<string name="tvBorrowtime">Medium enleihen bis:</string>
-	<string name="btSave">Neues Medium anlegen</string>
+	<string name="tvGiveMediaBack">Medium zurückmelden</string><string name="btSave">Neues Medium anlegen</string>
 	<string name="btLendmedia">Medium verleihen</string>
 	<string name="btBorrowSave">Entliehenes Medium anlegen</string>
-	<string name="btManually">Manuell</string><string name="btScan">Scannen</string><string name="spMediatype">Wähle einen Typ</string>
+	<string name="btManually">Manuell</string><string name="btScan">Scannen</string><string name="btGiveMediaBack">Medium zurückmelden</string><string name="spMediatype">Wähle einen Typ</string>
 	<string name="spMedia">Wähle ein Medium</string>
 	<string name="spLendto">Wähle einen Kontakt</string>
 	<string name="spLegalOwner">Wähle einen Kontakt</string>
 	<string name="spFilter">Wähle einen Filter</string>
-<string name="giveback_media">Medium zurückmelden</string>
+
+
+
+
 
 
 </resources>
