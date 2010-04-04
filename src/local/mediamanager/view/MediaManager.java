@@ -22,6 +22,12 @@ import android.widget.Button;
 //Zudem ist im Calender code eine for schleife die von 0 bis 1 laeuft?
 //TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
 //TODO medium verleiehen ueber scanner->searchbybarcode vorhanden
+// TODO final ueberall weg -> var zu instanzvar machen
+//TODO deklaration ausserhalb von onCreate (wo eh immer gebraucht wird)
+// damit auch diese final scheisse weg kommt
+//TODO gemeinsamer dialog manuell/scannen + button bilder
+//TODO gemeinsamer dialog fuer amazon fehler und sonstiges
+//TODO die laenge der strings vom itemlookup soll nicht die GUI zerschiessen
 
 /**
  * Dies ist die Einstiegsactivity des MediaManagers. Von hier aus werden alle
@@ -84,8 +90,8 @@ public class MediaManager extends SharedActivity {
 		Button btLendMedia = (Button) findViewById(R.id.lend_media);
 		btLendMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				final String BORROW_MEDIA_TYPE = "Möchten Sie das Medium" +
-						" manuell auswählen oder durch scannen?";
+				final String BORROW_MEDIA_TYPE = "Möchten Sie das Medium"
+						+ " manuell auswählen oder durch scannen?";
 				final String BORROW_MEDIA_MANUALLY = "Manuell";
 				final String BORROW_MEDIA_BY_SCANINNG = "Scannen";
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen

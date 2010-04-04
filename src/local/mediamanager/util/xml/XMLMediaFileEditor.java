@@ -157,7 +157,7 @@ public class XMLMediaFileEditor {
 	 */
 	public Media getMediaByBarcode(String barcode) {
 		// Medium welches spaeter zurueckgegeben wird
-		Media media = new Media();
+		Media media = null;
 		// xml doc holen
 		Document doc = xmlParser.readDocumentFromFile();
 		// root element holen
@@ -176,6 +176,7 @@ public class XMLMediaFileEditor {
 				// element gefunden also schleife beenden
 				elementFound = true;
 				// Mediumwerte speichern
+				media = new Media();
 				media.setType(elem.getAttributeValue(0));
 				media.setBarcode(((Element) elem.getChild(0)).getText(0));
 				media.setTitle(((Element) elem.getChild(1)).getText(0));
@@ -262,13 +263,14 @@ public class XMLMediaFileEditor {
 				elementFound = true;
 				// Medium loeschen
 				root.removeChild(currentElement);
-				
+				// das xml doc schreiben
+				xmlSerializer.writeDocumentToFile(doc);
+				// Medium mit neuem Status hinzufuegen		
+				addMedia(media);				
 			} else {
 				++currentElement;
 			}
-		}
-		// Medium mit neuem Status hinzufuegen		
-		addMedia(media);
+		}	
 	}
 
 	/**
