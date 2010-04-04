@@ -1,49 +1,63 @@
 package local.mediamanager.view;
 
-import java.util.HashMap;
-
 import local.mediamanager.R;
+import local.mediamanager.listener.LendMediaScanListener;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
-import local.mediamanager.util.Date;
 import local.mediamanager.util.itemlookup.AmazonItemLookup;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
 import local.mediamanager.view.menuhelper.SharedActivity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+// TODO wenn man auf zureck bei adden geht dann sollte auch die LendMedia finishen
+
+/**
+ * Activity zum verleihen eines Mediums per Scannen. Wenn das eingescannt Medium
+ * im MediaManager bereits existiert wird im Spinner dar entsprechende
+ * Mediumtitel angezeigt und der Benutzer kann das Medium verleihen (falls es
+ * nicht verliehen oder entliehen ist). Falls das Medium noch nicht angelegt
+ * wurde wird dem Benutzer mitgeteilt das er das Medium erst anlegen muss.
+ * Danach wird automatisch ein ItemLookUp mit dem eingescannten Barcode gemacht
+ * und die AddMedia Activity aufgerufen. Falls Amazon das Medium gefunden hat
+ * werden alle Informationen (Barcode, Titel etc.) in die AddMedia GUI
+ * eingetragen und der Benutzer braucht nur noch den "Medium anlegen" Button
+ * druecken. Falls Amazon das Medium nicht gefunden hat muss der Benutzer alle
+ * Medieninformationen von Hand eintragen. Danach springt das Programm zurueck
+ * in die LendMediaScan GUI und der Benutzer kann das Medium nun verleihen.
+ * 
+ * @author Joerg Langner
+ */
 public class LendMediaScan extends SharedActivity {
 
 	// Request Code fuer Scannen
 	private final static int SCAN_REQUEST_CODE = 0;
 	// Request Code fuer AddMedia
-	public static final int ADD_MEDIA_REQUEST_CODE = 1;
-	
+	private static final int ADD_MEDIA_REQUEST_CODE = 1;
+
 	// Beschriftungen fuer Dialogfenster-Fehlermeldung
 	private final String MEDIA_NOT_AVAILABLE = "Das eingescannte Medium kann nicht"
 			+ " verliehen werden da es bereits verliehen ist oder es entliehen ist.";
-	// Informationstext wenn Medium angelegt wurde
-	private final String MEDIA_SUCCESSFULLY_LENT = "Medium erfolgreich verliehen.";
+	private final String MEDIA_NOT_EXISTS = "Das Medium ist nicht vorhanden und muss zuvor angelegt werden.";
 
+	// Barcode der gescannt wird
 	private String barcode;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
 		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
-		 startActivityForResult(in, SCAN_REQUEST_CODE);		
+		 startActivityForResult(in, SCAN_REQUEST_CODE);
+		 //Test fuer Emulator
+//		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent()
+//				.putExtra("barcode", "111"));
 	}
 
 	/*
@@ -51,6 +65,7 @@ public class LendMediaScan extends SharedActivity {
 	 * wurde
 	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
 		// ueberpruefen von welcher Activity der callback kommt
 		switch (requestCode) {
 		case SCAN_REQUEST_CODE:
@@ -64,46 +79,19 @@ public class LendMediaScan extends SharedActivity {
 						.getMediaByBarcode(barcode);
 				// Medium wurde nicht in der xml gefunden
 				if (media == null) {
-					// TODO wenn man auf zureck bei adden geht dann scheisse
 					// Medium muss erst angelegt werden
 					// es werden die Medieninformationen ermittelt:
-					// Progress Dialog starten, da die Anfrage an Amazon und
-					// deren Antwort (das XML Dokument) ein paar Sekunden
-					// dauern kann. Zudem muss das XML Dokument noch geparst
-					// werden.
-					ProgressDialog progressDialog = ProgressDialog.show(this,
-							"", "Bitte warten...", true);
-					// String barcode = data.getStringExtra("barcode");
-					String uri = AmazonItemLookup.createRequestURL(barcode);
-					media = AmazonItemLookup.fetchMedia(uri);
-					// suche bei amazon beendet
-					progressDialog.dismiss();
-					// ueberpruefen ob amazon das medium gefunden hat
-					if (media != null) {
-						// die durch die ItemLoopUp Anfrage ermittelten
-						// Medieninformationen werden an die AddMedia Activity
-						// weitergegeben welche die Werte wie ISBN, Titel etc in
-						// die GUI eintraegt
-						Intent in = new Intent(LendMediaScan.this,
-								AddMedia.class);
-						in.putExtra(AddMedia.BARCODE, media.getBarcode());
-						in.putExtra(AddMedia.TITLE, media.getTitle());
-						in.putExtra(AddMedia.AUTHOR, media.getAuthor());
-						in.putExtra(AddMedia.TYPE, media.getType());
-						startActivityForResult(in,
-								ADD_MEDIA_REQUEST_CODE);
-					}
-					// medium wurde nicht von amazon gefunden daher muss das
-					// Medium manuell angelegt werden d.h. die
-					// Medieninformationen wie ISBN, Titel etc muessen vom
-					// Benutzer selber eingertragen werden
-					else {
-						Intent in = new Intent(LendMediaScan.this,
-								AddMedia.class);
-						in.putExtra(AddMedia.BARCODE, barcode);
-						startActivityForResult(in,
-								ADD_MEDIA_REQUEST_CODE);
-					}
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder.setMessage(MEDIA_NOT_EXISTS).setCancelable(false)
+							.setNeutralButton("Weiter",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+											addMedia(barcode);
+										}
+									});
+					AlertDialog alert = builder.create();
+					alert.show();
 				}
 				// Medium wurde in der xml gefunden
 				else {
@@ -147,35 +135,8 @@ public class LendMediaScan extends SharedActivity {
 
 				// Button "Medium verleihen"
 				Button btBorrowmedia = (Button) findViewById(R.id.btLendmedia);
-				btBorrowmedia.setOnClickListener(new OnClickListener() {
-					public void onClick(View arg0) {
-						Spinner spLendto = (Spinner) findViewById(R.id.spLendto);
-						DatePicker dpLendtime = (DatePicker) findViewById(R.id.dpLendtime);
-						Contact contacts = new Contact(LendMediaScan.this);
-						HashMap<Integer, Integer> contactIDMap = contacts
-								.getContactIDMap();
-						Date dateObject = new Date(dpLendtime.getDayOfMonth(),
-								dpLendtime.getMonth() + 1, dpLendtime.getYear());
-						String date = dateObject.getDate();
-						XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(
-								LendMediaScan.this);
-						Media media = xmlEditor.getMediaByBarcode(barcode);
-						media.setOwner(contactIDMap.get(
-								spLendto.getSelectedItemPosition()).toString());
-						media.setDate(date);
-						media.setStatus(Media.STATUS.VERLIEHEN.getName());
-						media.setLegalOwner(Media.DEFAULT_LEGAL_OWNER);
-						// Medium updaten
-						xmlEditor.updateMediaByBarcode(barcode, media);
-						Context context = getApplicationContext();
-						// nachricht an Benutzer das medium erfolgreich
-						// verliehen wurde
-						Toast.makeText(context, MEDIA_SUCCESSFULLY_LENT,
-								Toast.LENGTH_SHORT).show();
-						LendMediaScan.this.finish();
-					}
-
-				});
+				btBorrowmedia.setOnClickListener(new LendMediaScanListener(
+						this, barcode));
 
 			} else if (resultCode == Activity.RESULT_CANCELED) {
 				// Barcode Scannen war nicht erfolgreich
@@ -199,6 +160,45 @@ public class LendMediaScan extends SharedActivity {
 			break;
 		default:
 			this.finish();
+		}
+	}
+
+	/**
+	 * Wenn das Medium welches verleiht werdern soll nicht gefunden wurde dann
+	 * muss es zunaechst vom Benutzer angelegt werden.
+	 * 
+	 * @param barcode
+	 *            Barcode fuer ItemLookup
+	 */
+	private void addMedia(String barcode) {
+		// Progress Dialog starten, da die Anfrage an Amazon und deren Antwort
+		// (das XML Dokument) ein paar Sekunden dauern kann. Zudem muss das XML
+		// Dokument noch geparst werden.
+		ProgressDialog progressDialog = ProgressDialog.show(LendMediaScan.this,
+				"", "Bitte warten...", true);
+		String uri = AmazonItemLookup.createRequestURL(barcode);
+		Media media = AmazonItemLookup.fetchMedia(uri);
+		// suche bei amazon beendet
+		progressDialog.dismiss();
+		// ueberpruefen ob amazon das medium gefunden hat
+		if (media != null) {
+			// die durch die ItemLoopUp Anfrage ermittelten Medieninformationen
+			// werden an die AddMedia Activity weitergegeben welche die Werte
+			// wie ISBN, Titel etc in die GUI eintraegt
+			Intent in = new Intent(LendMediaScan.this, AddMedia.class);
+			in.putExtra(AddMedia.BARCODE, media.getBarcode());
+			in.putExtra(AddMedia.TITLE, media.getTitle());
+			in.putExtra(AddMedia.AUTHOR, media.getAuthor());
+			in.putExtra(AddMedia.TYPE, media.getType());
+			startActivityForResult(in, ADD_MEDIA_REQUEST_CODE);
+		}
+		// medium wurde nicht von amazon gefunden daher muss das Medium manuell
+		// angelegt werden d.h. die Medieninformationen wie ISBN, Titel etc
+		// muessen vom Benutzer selber eingertragen werden
+		else {
+			Intent in = new Intent(LendMediaScan.this, AddMedia.class);
+			in.putExtra(AddMedia.BARCODE, barcode);
+			startActivityForResult(in, ADD_MEDIA_REQUEST_CODE);
 		}
 	}
 }
