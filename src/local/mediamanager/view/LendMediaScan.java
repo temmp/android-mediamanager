@@ -28,6 +28,9 @@ public class LendMediaScan extends SharedActivity {
 
 	// Request Code fuer Scannen
 	private final static int SCAN_REQUEST_CODE = 0;
+	// Request Code fuer AddMedia
+	public static final int ADD_MEDIA_REQUEST_CODE = 1;
+	
 	// Beschriftungen fuer Dialogfenster-Fehlermeldung
 	private final String MEDIA_NOT_AVAILABLE = "Das eingescannte Medium kann nicht"
 			+ " verliehen werden da es bereits verliehen ist oder es entliehen ist.";
@@ -39,15 +42,16 @@ public class LendMediaScan extends SharedActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
-		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
-		 startActivityForResult(in, SCAN_REQUEST_CODE);
+//		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
+//		 startActivityForResult(in, SCAN_REQUEST_CODE);
+		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent().putExtra("barcode", "9783642015939"));
 	}
 
 	/*
 	 * wird aufgerufen wenn eine von hier gestartete ScanMedia activity beendet
 	 * wurde
 	 */
-	protected void result(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// ueberpruefen von welcher Activity der callback kommt
 		switch (requestCode) {
 		case SCAN_REQUEST_CODE:
@@ -88,7 +92,7 @@ public class LendMediaScan extends SharedActivity {
 						in.putExtra(AddMedia.AUTHOR, media.getAuthor());
 						in.putExtra(AddMedia.TYPE, media.getType());
 						startActivityForResult(in,
-								AddMedia.ADD_MEDIA_REQUEST_CODE);
+								ADD_MEDIA_REQUEST_CODE);
 					}
 					// medium wurde nicht von amazon gefunden daher muss das
 					// Medium manuell angelegt werden d.h. die
@@ -99,7 +103,7 @@ public class LendMediaScan extends SharedActivity {
 								AddMedia.class);
 						in.putExtra(AddMedia.BARCODE, barcode);
 						startActivityForResult(in,
-								AddMedia.ADD_MEDIA_REQUEST_CODE);
+								ADD_MEDIA_REQUEST_CODE);
 					}
 				}
 				// Medium wurde in der xml gefunden
@@ -181,15 +185,7 @@ public class LendMediaScan extends SharedActivity {
 				this.finish();
 			}
 			break;
-		default:
-			break;
-		}
-	}
-
-	// wird aufgerufen wenn eine von hier gestartete activity beendet wurde
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
-		case AddMedia.ADD_MEDIA_REQUEST_CODE:
+		case ADD_MEDIA_REQUEST_CODE:
 			if (resultCode == Activity.RESULT_OK) {
 				// Spinner aus den Resourcen holen und den Adapter setzen
 				Spinner spMedia = (Spinner) findViewById(R.id.spMedia);
