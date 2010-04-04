@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/layout_root" 
+	android:orientation="vertical"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"	
+	android:padding="10dp">	
+	<TextView 
+		android:id="@+id/tvDialog" 
+		android:layout_height="wrap_content" 
+		android:layout_width="fill_parent"
+		android:gravity="center_horizontal"
+		android:textColor="#FFF" />
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/layout_root" 
+		android:orientation="horizontal"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"		
+		android:padding="10dp" >
+		<Button android:text="@string/btManually"
+			android:id="@+id/btDialogManually" 
+			android:drawableLeft="@drawable/edit"
+			android:layout_height="fill_parent" 
+			android:layout_width="wrap_content" />
+		<Button android:text="@string/btScan" 
+			android:id="@+id/btDialogScan"
+			android:drawableLeft="@drawable/scann"			
+			android:layout_height="fill_parent"
+			android:layout_width="wrap_content" />
+	</LinearLayout>
+</LinearLayout>
