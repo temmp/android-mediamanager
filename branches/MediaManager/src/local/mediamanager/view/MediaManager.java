@@ -8,8 +8,7 @@ import local.mediamanager.R;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
 import local.mediamanager.util.xml.XMLSerializer;
 import local.mediamanager.view.menuhelper.SharedActivity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import local.mediamanager.view.shareddialogs.MediaManagerSharedDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,23 +20,36 @@ import android.widget.Button;
 //zurueckmelden? soll der eintrag automatisch erstellt werden?
 //Zudem ist im Calender code eine for schleife die von 0 bis 1 laeuft?
 //TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
-//TODO medium verleiehen ueber scanner->searchbybarcode vorhanden
+//TODO Test> medium verleiehen ueber scanner->searchbybarcode vorhanden
 // TODO final ueberall weg -> var zu instanzvar machen
 //TODO deklaration ausserhalb von onCreate (wo eh immer gebraucht wird)
 // damit auch diese final scheisse weg kommt
 //TODO gemeinsamer dialog manuell/scannen + button bilder
 //TODO gemeinsamer dialog fuer amazon fehler und sonstiges
 //TODO die laenge der strings vom itemlookup soll nicht die GUI zerschiessen
+//TODO was ist contact_entry.xml?
+//TODO icons in spinner fuer medientyp
 
 /**
  * Dies ist die Einstiegsactivity des MediaManagers. Von hier aus werden alle
- * anderen Activities wie Medium scannen, manuell anlegen, verleihen, entleihen
+ * anderen Activities wie Medium anlegen, verleihen, entleihen ,zurueckmelden
  * und Medien anzeigen gestartet.
  * 
  * @author Andreas Wiedemann
  * @author Joerg Langner
  */
 public class MediaManager extends SharedActivity {
+
+	// Textinhalt des Dialog
+	private final String DIALOG_TEXT_ADD_MEDIA = "Wie möchten Sie das Medium anlegen?";
+	private final String DIALOG_TEXT_LEND_MEDIA = "Möchten Sie das Medium, welches verliehen"
+			+ " werden soll, manuell Auswählen oder durch scannen?";
+	private final String DIALOG_TEXT_BORROW_MEDIA = "Möchten Sie das Medium, welches entliehen"
+			+ " werden soll, manuell Auswählen oder durch scannen?";
+	// Beschriftungen der Titel des Dialogs
+	private final String DIALOG_TITLE_ADD_MEDIA = "Medium anlegen";
+	private final String DIALOG_TITLE_LEND_MEDIA = "Medium verleihen";
+	private final String DIALOG_TITLE_BORROW_MEDIA = "Medium entleihen";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,30 +65,25 @@ public class MediaManager extends SharedActivity {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Button btScanMedia = (Button) findViewById(R.id.scan_media);
-		btScanMedia.setOnClickListener(new OnClickListener() {
-			public void onClick(View arg0) {
-				// ScanMedia ist die activity die gestartet wird
-				Intent in = new Intent(MediaManager.this, AddMediaScan.class);
-				startActivity(in);
-				// Local ItemLookup Test by JL:
-				// String uri =
-				// AmazonItemLookup.createBookRequestURL("9783642015939");
-				// Log.i("log", uri);
-				// Media media = AmazonItemLookup.fetchMedia(uri);
-			}
-		});
 
+		// Butten zum hinzufuegen eines Mediums
 		Button btAddMedia = (Button) findViewById(R.id.add_media);
 		btAddMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				// AddMedia ist die activity die gestartet wird
-				Intent in = new Intent(MediaManager.this, AddMedia.class);
-				startActivity(in);
+				// Intent fuer manuelles anlegen eines Mediums
+				Intent manualIntent = new Intent(MediaManager.this,
+						AddMedia.class);
+				// Intent fuer das Anlegen eines Mediums per scannen
+				Intent scanIntent = new Intent(MediaManager.this,
+						AddMediaScan.class);
+				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
+				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
+						scanIntent, DIALOG_TEXT_ADD_MEDIA, DIALOG_TITLE_ADD_MEDIA).show();
 			}
 
 		});
 
+		// Butten zum Anzeigen der Medien
 		Button btShowMedia = (Button) findViewById(R.id.show_media);
 		btShowMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
@@ -87,81 +94,36 @@ public class MediaManager extends SharedActivity {
 
 		});
 
+		// Butten verleihen eines Mediums
 		Button btLendMedia = (Button) findViewById(R.id.lend_media);
 		btLendMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				final String BORROW_MEDIA_TYPE = "Möchten Sie das Medium"
-						+ " manuell auswählen oder durch scannen?";
-				final String BORROW_MEDIA_MANUALLY = "Manuell";
-				final String BORROW_MEDIA_BY_SCANINNG = "Scannen";
+				// Intent fuer manuelles anlegen eines Mediums
+				Intent manualIntent = new Intent(MediaManager.this,
+						LendMedia.class);
+				// Intent fuer das Anlegen eines Mediums per scannen
+				Intent scanIntent = new Intent(MediaManager.this,
+						LendMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						MediaManager.this);
-				builder.setMessage(BORROW_MEDIA_TYPE).setCancelable(false)
-						.setPositiveButton(BORROW_MEDIA_MANUALLY,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										// BorrowMedia ist die activity die
-										// gestartet wird
-										Intent in = new Intent(
-												MediaManager.this,
-												LendMedia.class);
-										startActivity(in);
-									}
-								}).setNegativeButton(BORROW_MEDIA_BY_SCANINNG,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										// BorrowMediaScan ist die activity die
-										// gestartet wird
-										Intent in = new Intent(
-												MediaManager.this,
-												LendMediaScan.class);
-										startActivity(in);
-									}
-								});
-				builder.show();
-
+				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
+						scanIntent, DIALOG_TEXT_LEND_MEDIA, DIALOG_TITLE_LEND_MEDIA).show();
 			}
 
 		});
 
+		// Butten zum entleihen eines Mediums
 		Button btBorrowMedia = (Button) findViewById(R.id.borrow_media);
 		btBorrowMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				final String BORROW_MEDIA_TYPE = "Wie wollen Sie das entliehene"
-						+ " Medium anlegen?";
-				final String BORROW_MEDIA_MANUALLY = "Manuell";
-				final String BORROW_MEDIA_BY_SCANINNG = "Scannen";
+				// Intent fuer manuelles anlegen eines Mediums
+				Intent manualIntent = new Intent(MediaManager.this,
+						BorrowMedia.class);
+				// Intent fuer das Anlegen eines Mediums per scannen
+				Intent scanIntent = new Intent(MediaManager.this,
+						BorrowMediaScan.class);
 				// Dialog zur Auswahl von "Manuell" oder "Scannen" anzeigen
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						MediaManager.this);
-				builder.setMessage(BORROW_MEDIA_TYPE).setCancelable(false)
-						.setPositiveButton(BORROW_MEDIA_MANUALLY,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										// BorrowMedia ist die activity die
-										// gestartet wird
-										Intent in = new Intent(
-												MediaManager.this,
-												BorrowMedia.class);
-										startActivity(in);
-									}
-								}).setNegativeButton(BORROW_MEDIA_BY_SCANINNG,
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-										// BorrowMediaScan ist die activity die
-										// gestartet wird
-										Intent in = new Intent(
-												MediaManager.this,
-												BorrowMediaScan.class);
-										startActivity(in);
-									}
-								});
-				builder.show();
+				new MediaManagerSharedDialog(MediaManager.this, manualIntent,
+						scanIntent, DIALOG_TEXT_BORROW_MEDIA, DIALOG_TITLE_BORROW_MEDIA).show();
 			}
 		});
 	}

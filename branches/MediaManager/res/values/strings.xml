@@ -20,10 +20,12 @@
 	<string name="btSave">Neues Medium anlegen</string>
 	<string name="btLendmedia">Medium verleihen</string>
 	<string name="btBorrowSave">Entliehenes Medium anlegen</string>
-	<string name="spMediatype">Wähle einen Typ</string>
+	<string name="btManually">Manuell</string><string name="btScan">Scannen</string><string name="spMediatype">Wähle einen Typ</string>
 	<string name="spMedia">Wähle ein Medium</string>
 	<string name="spLendto">Wähle einen Kontakt</string>
 	<string name="spLegalOwner">Wähle einen Kontakt</string>
 	<string name="spFilter">Wähle einen Filter</string>
 <string name="giveback_media">Medium zurückmelden</string>
+
+
 </resources>
