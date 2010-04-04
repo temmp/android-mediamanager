@@ -4,9 +4,11 @@ import local.mediamanager.R;
 import local.mediamanager.listener.BorrowMediaListener;
 import local.mediamanager.util.Contact;
 import local.mediamanager.view.menuhelper.SharedActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 /**
@@ -20,10 +22,22 @@ public class BorrowMedia extends SharedActivity {
 	private Spinner spMediatype;
 	private Spinner spLegalOwner;
 
+	// Intent extra namen
+	public static final String BARCODE = "barcode";
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.borrowmedia);
 
+		// es wird ueberprueft ob die aufrufende Activity dieser Activity einen
+		// Barcode mitgegeben hat. Falls ja wird dieser in die GUI eingetragen.
+		Intent in = getIntent();
+		if (in.getStringExtra(BARCODE) != null) {
+			EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
+			etBarcode.setText(in.getStringExtra(BARCODE));
+		}
+
+		// Spinner "Medientyp" mit den verfuegbaren Medientypen fuellen
 		spMediatype = (Spinner) findViewById(R.id.spMediatype);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 				this, R.array.mediatypes, android.R.layout.simple_spinner_item);
