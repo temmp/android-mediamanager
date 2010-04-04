@@ -42,9 +42,8 @@ public class LendMediaScan extends SharedActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
-//		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
-//		 startActivityForResult(in, SCAN_REQUEST_CODE);
-		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent().putExtra("barcode", "9783642015939"));
+		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
+		 startActivityForResult(in, SCAN_REQUEST_CODE);		
 	}
 
 	/*
