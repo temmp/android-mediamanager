@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
     <string name="app_name">MediaManager 1.0</string>
-	<string name="scan_media">Medium per scannen anlegen</string>
-	<string name="add_media">Medium manuell anlegen</string>
+	
+	<string name="add_media">Medium anlegen</string>
 	<string name="borrow_media">Medium entleihen</string>
 	<string name="lend_media">Medium verleihen</string>
 	<string name="show_media">Medien anzeigen</string>
