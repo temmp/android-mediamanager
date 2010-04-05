@@ -13,6 +13,17 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Scannt ein Medium. Wenn der Barcode im MediaManager gefunden wurde und das
+ * Medium verliehen oder entliehen ist dann werden alle Informationen in die GUI
+ * Elemente eingetragen (Barcode, Titel etc.) und der Benutzer kann ueber den
+ * Button "Medium zurückmelden" selbiges tun. Falls das Medium nicht gefunden
+ * wurde oder das Medium weder verliehen noch entliehen ist dann kann es nicht
+ * zurueckgemeldet werden. In diesen Fällen bekommt der Benutzer eine
+ * Fehlermeldung angezeigt.
+ * 
+ * @author default
+ */
 public class GiveMediaBackScan extends SharedActivity {
 
 	// Requestcode fuer Scannen
@@ -29,11 +40,11 @@ public class GiveMediaBackScan extends SharedActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Scanvorgang starten
-		 Intent in = new Intent(GiveMediaBackScan.this, ScanMedia.class);
-		 startActivityForResult(in, SCAN_REQUEST_CODE);
+		Intent in = new Intent(GiveMediaBackScan.this, ScanMedia.class);
+		startActivityForResult(in, SCAN_REQUEST_CODE);
 		// Test without scanner
-//		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent()
-//				.putExtra(ScanMedia.BARCODE_EXTRA, "222"));
+		// onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent()
+		// .putExtra(ScanMedia.BARCODE_EXTRA, "222"));
 	}
 
 	/*

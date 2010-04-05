@@ -21,6 +21,14 @@ import android.widget.Spinner;
  */
 public class LendMedia extends SharedActivity {
 
+	// GUI Elemente
+	private Spinner spLendto;
+	private Spinner spMedia;
+	private Button btBorrowmedia;
+	// Adapter fuer Spinner
+	private ArrayAdapter<CharSequence> mediaTypeAdapter;
+	private ArrayAdapter<CharSequence> contactAdapter;
+
 	// HashMap aus [laufender Nummer & MediumID]
 	private HashMap<Integer, Integer> filteredIDList;
 
@@ -31,16 +39,16 @@ public class LendMedia extends SharedActivity {
 		// View setzen
 		setContentView(R.layout.lendmedia);
 		// Spinner "Medium" mit Medienliste fuellen
-		Spinner spMedia = (Spinner) findViewById(R.id.spMedia);
-		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+		spMedia = (Spinner) findViewById(R.id.spMedia);
+		mediaTypeAdapter = new ArrayAdapter<CharSequence>(
 				this, android.R.layout.simple_spinner_item);
-		spMedia.setAdapter(adapter);
+		spMedia.setAdapter(mediaTypeAdapter);
 		List<Media> mediaList = new XMLMediaFileEditor(this).getAllMedia();
 		int counterMedia = 0;
 		int counterLentMedia = 0;
 		for (Media media : mediaList) {
 			if (media.getStatus().equals(Media.STATUS.VORHANDEN.getName())) {
-				adapter.add(media.getTitle());
+				mediaTypeAdapter.add(media.getTitle());
 				filteredIDList.put(counterLentMedia, counterMedia);
 				++counterLentMedia;
 			}
@@ -48,14 +56,14 @@ public class LendMedia extends SharedActivity {
 		}
 
 		// Spinner "Medium entleihen an" mit Kontaktliste füllen
-		Spinner spLendto = (Spinner) findViewById(R.id.spLendto);
+		spLendto = (Spinner) findViewById(R.id.spLendto);
 		Contact contactNameList = new Contact(this);
-		ArrayAdapter<CharSequence> contactAdapter = new ArrayAdapter<CharSequence>(
-				this, android.R.layout.simple_spinner_item, contactNameList
+		contactAdapter = new ArrayAdapter<CharSequence>(this,
+				android.R.layout.simple_spinner_item, contactNameList
 						.getContactNameList());
 		spLendto.setAdapter(contactAdapter);
 
-		Button btBorrowmedia = (Button) findViewById(R.id.btLendmedia);
+		btBorrowmedia = (Button) findViewById(R.id.btLendmedia);
 		btBorrowmedia.setOnClickListener(new LendMediaListener(this,
 				filteredIDList));
 	}

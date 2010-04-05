@@ -21,13 +21,8 @@ import android.widget.Button;
 //Zudem ist im Calender code eine for schleife die von 0 bis 1 laeuft?
 //TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
 //TODO Test> medium verleiehen ueber scanner->searchbybarcode vorhanden
-// TODO final ueberall weg -> var zu instanzvar machen
-//TODO deklaration ausserhalb von onCreate (wo eh immer gebraucht wird)
 // damit auch diese final scheisse weg kommt
-//TODO gemeinsamer dialog manuell/scannen + button bilder
-//TODO gemeinsamer dialog fuer amazon fehler und sonstiges
 //TODO die laenge der strings vom itemlookup soll nicht die GUI zerschiessen
-//TODO was ist contact_entry.xml?
 //TODO icons in spinner fuer medientyp
 
 /**
@@ -40,6 +35,13 @@ import android.widget.Button;
  */
 public class MediaManager extends SharedActivity {
 
+	//GUI Elemente
+	private Button btAddMedia;
+	private Button btShowMedia;
+	private Button btLendMedia;
+	private Button btBorrowMedia;
+	private Button btGiveMediaBack;
+	
 	// Textinhalt des Dialog
 	private final String DIALOG_TEXT_ADD_MEDIA = "Wie möchten Sie das Medium anlegen?";
 	private final String DIALOG_TEXT_LEND_MEDIA = "Möchten Sie das Medium manuell oder per scannen verleihen?";
@@ -50,7 +52,7 @@ public class MediaManager extends SharedActivity {
 	private final String DIALOG_TITLE_LEND_MEDIA = "Medium verleihen";
 	private final String DIALOG_TITLE_BORROW_MEDIA = "Medium entleihen";
 	private final String DIALOG_TITLE_GIVE_MEDIA_BACK = "Medium zurückmelden";
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,7 +69,7 @@ public class MediaManager extends SharedActivity {
 		}
 
 		// Butten zum hinzufuegen eines Mediums
-		Button btAddMedia = (Button) findViewById(R.id.add_media);
+		btAddMedia = (Button) findViewById(R.id.add_media);
 		btAddMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// Intent fuer manuelles anlegen eines Mediums
@@ -85,7 +87,7 @@ public class MediaManager extends SharedActivity {
 		});
 
 		// Butten zum Anzeigen der Medien
-		Button btShowMedia = (Button) findViewById(R.id.show_media);
+		btShowMedia = (Button) findViewById(R.id.show_media);
 		btShowMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// ShowMedia ist die activity die gestartet wird
@@ -96,7 +98,7 @@ public class MediaManager extends SharedActivity {
 		});
 
 		// Butten verleihen eines Mediums
-		Button btLendMedia = (Button) findViewById(R.id.lend_media);
+		btLendMedia = (Button) findViewById(R.id.lend_media);
 		btLendMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// Intent fuer manuelles verleihen eines Mediums
@@ -114,7 +116,7 @@ public class MediaManager extends SharedActivity {
 		});
 
 		// Butten zum entleihen eines Mediums
-		Button btBorrowMedia = (Button) findViewById(R.id.borrow_media);
+		btBorrowMedia = (Button) findViewById(R.id.borrow_media);
 		btBorrowMedia.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// Intent fuer manuelles entleihen eines Mediums
@@ -131,7 +133,7 @@ public class MediaManager extends SharedActivity {
 		});
 
 		//Button zum zurückmelden eines Mediums
-		Button btGiveMediaBack = (Button) findViewById(R.id.give_media_back);
+		btGiveMediaBack = (Button) findViewById(R.id.give_media_back);
 		btGiveMediaBack.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// Intent fuer manuelles entleihen eines Mediums

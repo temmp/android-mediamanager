@@ -38,7 +38,35 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  * @author Jörg Langner
  */
 public class ShowMedia extends SharedListActivity {
-	
+
+	// GUI Elemente
+	private ListView listView;
+	private Spinner filterSpinner;
+	private LinearLayout linearLayout;
+	private TextView textView;
+	private ArrayAdapter<CharSequence> spinnerAdapter;
+
+	// Bezeichnungen fuer das Kontext Menue
+	private final String SMS_ENTRY = "SMS";
+	private final String DELETE_ENTRY = "Löschen";
+	private final String BACK_ENTRY = "Zurückmelden";
+	private final String REMINDER_SMS_ENTRY = "Erinnerungs-SMS";
+	private final String LENGTHENING_SMS_ENTRY = "Verlängerungs-SMS";
+
+	// Nachrichten an Benutzer
+	final String MEDIA_DELETED = "Medium wurde gelöscht.";
+	final String MEDIA_IS_BACK = "Medium wurde zurückgemeldet.";
+	final String MEDIA_COULD_NOT_SET_BACK = "Medium kann nicht zurückgemeldet"
+			+ " werden da es werder entliehen nocht verliehen ist.";
+
+	// Konstanten fuer die ContextMenu Optionen
+	private final int BACK = 0;
+	private final int SMS = 1;
+	private final int DELETE = 2;
+
+	// HashMap aus [laufender Nummer & Medium]
+	private HashMap<Integer, Integer> filteredIDList;
+
 	// enum fuer die Filterart
 	private enum FILTER {
 		SHOW_ALL_MEDIA(0, "Alle Medien anzeigen"), SHOW_LENT_MEDIA(1,
@@ -62,32 +90,8 @@ public class ShowMedia extends SharedListActivity {
 		}
 	}
 
-	// Bezeichnungen fuer das Kontext Menue
-	private final String SMS_ENTRY = "SMS";
-	private final String DELETE_ENTRY = "Löschen";
-	private final String BACK_ENTRY = "Zurückmelden";
-	private final String REMINDER_SMS_ENTRY = "Erinnerungs-SMS";
-	private final String LENGTHENING_SMS_ENTRY = "Verlängerungs-SMS";
-
-	// Konstanten fuer die ContextMenu Optionen
-	private final int BACK = 0;
-	private final int SMS = 1;
-	private final int DELETE = 2;
-
-	// ListView
-	private ListView listView;
-	// ListView Header
-	private Spinner filterSpinner;
-	private LinearLayout linearLayout;
-	private TextView textView;
-	// ListView Adapter
-	private ArrayAdapter<CharSequence> spinnerAdapter;
-	// HashMap aus [laufender Nummer & Medium]
-	private HashMap<Integer, Integer> filteredIDList;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		// HashMap
 		filteredIDList = new HashMap<Integer, Integer>();
@@ -338,7 +342,6 @@ public class ShowMedia extends SharedListActivity {
 			startActivity(mediaPos);
 			return true;
 		case DELETE:
-			final String MEDIA_DELETED = "Medium wurde gelöscht.";
 			new XMLMediaFileEditor(this).removeMediaByPosition(value);
 			Toast.makeText(this, MEDIA_DELETED, Toast.LENGTH_LONG).show();
 			// die updated Medienliste anzeigen
@@ -359,9 +362,6 @@ public class ShowMedia extends SharedListActivity {
 	 *            Das Medium welches zurueckgemeldet werden soll.
 	 */
 	private void setMediaBack(int selectedMedia) {
-		final String MEDIA_IS_BACK = "Medium wurde zurückgemeldet.";
-		final String MEDIA_COULD_NOT_SET_BACK = "Medium kann nicht zurückgemeldet"
-				+ " werden da es werder entliehen nocht verliehen ist.";
 		XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(ShowMedia.this);
 		Media mediaBack = xmlEditor.getMediaByPosition((int) selectedMedia);
 		if (mediaBack.getStatus().equals(Media.STATUS.VORHANDEN.getName())) {
