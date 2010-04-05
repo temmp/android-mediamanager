@@ -9,7 +9,9 @@ import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
 import local.mediamanager.view.sharedmenues.SharedListActivity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
+//TODO eigene listview ohne von listact zu erben?
 /**
  * GUI für die Anzeige der Medien. Es besteht aus einem Spinner (durch den die
  * Medienliste gefiltert wird) und der eigentliche Liste (die die Medien
@@ -57,7 +60,7 @@ public class ShowMedia extends SharedListActivity {
 	final String MEDIA_DELETED = "Medium wurde gelöscht.";
 	final String MEDIA_IS_BACK = "Medium wurde zurückgemeldet.";
 	final String MEDIA_COULD_NOT_SET_BACK = "Medium kann nicht zurückgemeldet"
-			+ " werden da es werder entliehen nocht verliehen ist.";
+			+ " werden da es werder entliehen noch verliehen ist.";
 
 	// Konstanten fuer die ContextMenu Optionen
 	private final int BACK = 0;
@@ -147,8 +150,8 @@ public class ShowMedia extends SharedListActivity {
 
 	/**
 	 * Hier wird die gefilterte Liste erstellt und angezeigt. Gefiltert wird auf
-	 * Grundlage des Parameters(alle Medien anzeigen, verliehene anzeigen,
-	 * entliehene anzeigen):
+	 * Grundlage des Übergabeparameters(alle Medien anzeigen, verliehene
+	 * anzeigen, entliehene anzeigen).
 	 * 
 	 * @param filterID
 	 *            Im enum "FILTER" sind die möglichen Filterungsarten
@@ -364,16 +367,30 @@ public class ShowMedia extends SharedListActivity {
 	private void setMediaBack(int selectedMedia) {
 		XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(ShowMedia.this);
 		Media mediaBack = xmlEditor.getMediaByPosition((int) selectedMedia);
+		// wenn das Medium vorhanden ist kann es nicht zurueckgegeben werden
 		if (mediaBack.getStatus().equals(Media.STATUS.VORHANDEN.getName())) {
-			Toast.makeText(this, MEDIA_COULD_NOT_SET_BACK, Toast.LENGTH_LONG)
-					.show();
-		} else if (mediaBack.getStatus().equals(
-				Media.STATUS.VERLIEHEN.getName())) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(MEDIA_COULD_NOT_SET_BACK).setCancelable(false)
+					.setNeutralButton("Ok",
+							new DialogInterface.OnClickListener() {
+								public void onClick(
+										DialogInterface dialog, int id) {
+									dialog.cancel();
+								}
+							});
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+		// wenn das Medium verliehen ist wird es auf vorhanden gesetzt
+		else if (mediaBack.getStatus().equals(Media.STATUS.VERLIEHEN.getName())) {
 			mediaBack.setStatus(Media.STATUS.VORHANDEN.getName());
+			mediaBack.setDate(Media.DEFAULT_DATE);
 			xmlEditor.updateMediaByPosition(selectedMedia, mediaBack);
 			Toast.makeText(this, MEDIA_IS_BACK, Toast.LENGTH_LONG).show();
-		} else if (mediaBack.getStatus().equals(
-				Media.STATUS.ENTLIEHEN.getName())) {
+		}
+		// wenn das Medium entliehen ist wird es geloescht da fremde Medien
+		// nicht gespeichert werden
+		else if (mediaBack.getStatus().equals(Media.STATUS.ENTLIEHEN.getName())) {
 			xmlEditor.removeMediaByPosition(selectedMedia);
 			Toast.makeText(this, MEDIA_IS_BACK, Toast.LENGTH_LONG).show();
 		}
