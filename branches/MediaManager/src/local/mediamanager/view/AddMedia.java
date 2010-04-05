@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-//TODO medium kann doppelt angelegt werden
 /**
  * GUI zum manuellen Hinzufuegen eines Mediums.
  * 
