@@ -55,7 +55,7 @@ public class LendMediaScan extends SharedActivity {
 		// Scanvorgang starten
 		 Intent in = new Intent(LendMediaScan.this, ScanMedia.class);
 		 startActivityForResult(in, SCAN_REQUEST_CODE);
-		 //Test fuer Emulator
+		// Test fuer Emulator
 //		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent()
 //				.putExtra("barcode", "111"));
 	}
@@ -156,6 +156,12 @@ public class LendMediaScan extends SharedActivity {
 				spMedia.setAdapter(adapter);
 				adapter.add(new XMLMediaFileEditor(this).getMediaByBarcode(
 						barcode).getTitle());
+			} else if (resultCode == Activity.RESULT_CANCELED) {
+				// der Benutzer hat beim Anlegen des Mediums abgebrochen. damit
+				// ist das Medium nicht angelegt und kann damit auch nicht
+				// verliehen werden. da der Benutzer selbst abgebrochen hat
+				// braucht keine extra fehlermeldung kommen
+				LendMediaScan.this.finish();
 			}
 			break;
 		default:
