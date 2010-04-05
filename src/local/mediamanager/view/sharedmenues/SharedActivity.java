@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,6 +50,7 @@ public class SharedActivity extends Activity {
 			// Textinhalt des Dialogs
 			TextView content = new TextView(this);
 			content.setText(INFO_DIALOG_CONTENT);
+			content.setGravity(Gravity.CENTER);
 			// klickbarer Link im Dialog
 			TextView link = new TextView(this);
 			link.setText(Html.fromHtml(INFO_DIALOG_URL));
