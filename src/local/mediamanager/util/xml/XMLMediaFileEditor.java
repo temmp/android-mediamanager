@@ -40,7 +40,9 @@ public class XMLMediaFileEditor {
 	}
 
 	/**
-	 * Die Methode fuegt ein neues Medium in die XML Datei ein.
+	 * Die Methode fuegt ein neues Medium in die XML Datei ein. Zuvor wird
+	 * ueberprueft ob das Medium welches angelegt werden soll bereits existiert.
+	 * Falls es bereits existiert wird das Medium nicht angelegt.
 	 * 
 	 * Nach dem einfuegen eines Mediums sieht der Aufbau des XML Dokumtes
 	 * beispielsweise so aus:
@@ -51,39 +53,48 @@ public class XMLMediaFileEditor {
 	 * 
 	 * @param media
 	 *            Medium Object
+	 * @return true wenn das Medium angelegt wurde. false wenn es bereits
+	 *         existierte
 	 */
 
-	public void addMedia(Media media) {
+	public boolean addMedia(Media media) {
 		// xml doc holen
 		Document doc = xmlParser.readDocumentFromFile();
-		// root Element der xml datei holen
-		Element root = doc.getRootElement();
-		// neue childs erstellen (createElement(namespace, name))
-		Element mediaChild = new Element().createElement(null, "media");
-		Element barcodeChild = new Element().createElement(null, "barcode");
-		Element titleChild = new Element().createElement(null, "title");
-		Element authorChild = new Element().createElement(null, "author");
-		Element statusChild = new Element().createElement(null, "status");
-		// attribut des mediaChilds setzen(namespace, name, value)
-		mediaChild.setAttribute(null, "type", media.getType());
-		statusChild.setAttribute(null, "legalOwner", media.getLegalOwner());
-		statusChild.setAttribute(null, "owner", media.getOwner());
-		statusChild.setAttribute(null, "date", media.getDate());
-		// values der anderen childs setzen
-		barcodeChild.addChild(Node.TEXT, media.getBarcode());
-		titleChild.addChild(Node.TEXT, media.getTitle());
-		authorChild.addChild(Node.TEXT, media.getAuthor());
-		statusChild.addChild(Node.TEXT, media.getStatus());
-		// dem root element das mediaChild hinzufuegen (type=ELEMENT,
-		// Node->Element)
-		root.addChild(Node.ELEMENT, mediaChild);
-		// dem mediaChild das barcode-,title- und authorChild hinzufuegen
-		mediaChild.addChild(Node.ELEMENT, barcodeChild);
-		mediaChild.addChild(Node.ELEMENT, titleChild);
-		mediaChild.addChild(Node.ELEMENT, authorChild);
-		mediaChild.addChild(Node.ELEMENT, statusChild);
-		// das xml doc schreiben
-		xmlSerializer.writeDocumentToFile(doc);
+		// ueberpruefen ob Medium bereits existiert
+		if (!mediaExists(media)) {
+			// Medium existiert noch nicht und wird angelegt
+			// root Element der xml datei holen
+			Element root = doc.getRootElement();
+			// neue childs erstellen (createElement(namespace, name))
+			Element mediaChild = new Element().createElement(null, "media");
+			Element barcodeChild = new Element().createElement(null, "barcode");
+			Element titleChild = new Element().createElement(null, "title");
+			Element authorChild = new Element().createElement(null, "author");
+			Element statusChild = new Element().createElement(null, "status");
+			// attribut des mediaChilds setzen(namespace, name, value)
+			mediaChild.setAttribute(null, "type", media.getType());
+			statusChild.setAttribute(null, "legalOwner", media.getLegalOwner());
+			statusChild.setAttribute(null, "owner", media.getOwner());
+			statusChild.setAttribute(null, "date", media.getDate());
+			// values der anderen childs setzen
+			barcodeChild.addChild(Node.TEXT, media.getBarcode());
+			titleChild.addChild(Node.TEXT, media.getTitle());
+			authorChild.addChild(Node.TEXT, media.getAuthor());
+			statusChild.addChild(Node.TEXT, media.getStatus());
+			// dem root element das mediaChild hinzufuegen (type=ELEMENT,
+			// Node->Element)
+			root.addChild(Node.ELEMENT, mediaChild);
+			// dem mediaChild das barcode-,title- und authorChild hinzufuegen
+			mediaChild.addChild(Node.ELEMENT, barcodeChild);
+			mediaChild.addChild(Node.ELEMENT, titleChild);
+			mediaChild.addChild(Node.ELEMENT, authorChild);
+			mediaChild.addChild(Node.ELEMENT, statusChild);
+			// das xml doc schreiben
+			xmlSerializer.writeDocumentToFile(doc);
+			return true;
+		}
+		// Medium existiert bereits und wird nicht angelegt
+		return false;
 	}
 
 	/**
@@ -144,7 +155,6 @@ public class XMLMediaFileEditor {
 		}
 		return false;
 	}
-	
 
 	/**
 	 * Diese Methode sucht nach einem Medium mit dem uebergebenen Barcode und
@@ -194,6 +204,38 @@ public class XMLMediaFileEditor {
 	}
 
 	/**
+	 * Diese Methode sucht nach dem uebergebenen Medium und gibt zurueck ob es
+	 * gefunden wurde oder nicht.
+	 * 
+	 * @return true wenn das Medium gefunden wurde. false wenn nicht.
+	 */
+	public boolean mediaExists(Media media) {
+		// xml doc holen
+		Document doc = xmlParser.readDocumentFromFile();
+		// root element holen
+		Element root = doc.getRootElement();
+		// countervariable aktuelles medium
+		int currentElement = 0;
+		// anzahl childs des root elements im xml dokument
+		int lastElement = root.getChildCount();
+		while (currentElement < lastElement) {
+			// die vorhandenen medien werden nacheinander geholt
+			Element elem = (Element) root.getChild(currentElement);
+			// barcode des aktuellen media childs gleich der des zu loeschenden
+			// barcodes?
+			if (((Element) elem.getChild(0)).getText(0).equals(
+					media.getBarcode())) {
+				// Medium mit diesem barcode gefunden
+				return true;
+			} else {
+				++currentElement;
+			}
+		}
+		// Medium mit diesem barcode nicht gefunden
+		return false;
+	}
+
+	/**
 	 * Diese Methode sucht nach einem Medium mit der uebergebenen Position und
 	 * gibt das Medium zurueck.
 	 * 
@@ -235,7 +277,7 @@ public class XMLMediaFileEditor {
 		removeMediaByPosition(pos);
 		addMedia(media);
 	}
-	
+
 	/**
 	 * Diese Methode updated ein Medium
 	 * 
@@ -266,12 +308,12 @@ public class XMLMediaFileEditor {
 				root.removeChild(currentElement);
 				// das xml doc schreiben
 				xmlSerializer.writeDocumentToFile(doc);
-				// Medium mit neuem Status hinzufuegen		
-				addMedia(media);				
+				// Medium mit neuem Status hinzufuegen
+				addMedia(media);
 			} else {
 				++currentElement;
 			}
-		}	
+		}
 	}
 
 	/**

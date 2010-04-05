@@ -22,6 +22,7 @@ public class AddMediaListener implements OnClickListener {
 
 	private Activity activity;
 	private final String MEDIA_SUCCESSFULLY_ADDED = "Medium erfolgreich angelegt.";
+	private final String MEDIA_ALREADY_ADDED = "Medium wurde bereits angelegt.";
 
 	public AddMediaListener(Activity activity) {
 		this.activity = activity;
@@ -45,12 +46,18 @@ public class AddMediaListener implements OnClickListener {
 
 		// Medium wird hinzugefuegt
 		XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(activity);
-		xmlEditor.addMedia(media);
-
-		// Nachricht an Benutzer das Medium erfolgreich hinzugefuegt wurde
+		boolean mediaAdded = xmlEditor.addMedia(media);
 		Context context = activity.getApplicationContext();
-		Toast.makeText(context, MEDIA_SUCCESSFULLY_ADDED, Toast.LENGTH_SHORT)
-				.show();
+		if(mediaAdded){
+			// Nachricht an Benutzer das Medium erfolgreich hinzugefuegt wurde			
+			Toast.makeText(context, MEDIA_SUCCESSFULLY_ADDED, Toast.LENGTH_SHORT)
+					.show();
+		}
+		else{
+			// Nachricht an Benutzer das Medium bereits angelegt war			
+			Toast.makeText(context, MEDIA_ALREADY_ADDED, Toast.LENGTH_SHORT)
+					.show();
+		}		
 		// Resultat des Medium anlegens
 		activity.setResult(Activity.RESULT_OK);
 		// activity wird geschlossen
