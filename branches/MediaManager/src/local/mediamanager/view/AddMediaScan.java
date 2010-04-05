@@ -54,7 +54,7 @@ public class AddMediaScan extends SharedActivity {
 
 				String barcode = data.getStringExtra(ScanMedia.BARCODE_EXTRA);
 				String uri = AmazonItemLookup.createRequestURL(barcode);
-				final Media media = AmazonItemLookup.fetchMedia(uri);
+				Media media = AmazonItemLookup.fetchMedia(uri);
 
 				progressDialog.dismiss();
 

@@ -17,8 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-// TODO wenn man auf zureck bei adden geht dann sollte auch die LendMedia finishen
-
 /**
  * Activity zum verleihen eines Mediums per Scannen. Wenn das eingescannt Medium
  * im MediaManager bereits existiert wird im Spinner dar entsprechende

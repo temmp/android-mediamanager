@@ -19,8 +19,13 @@ import android.widget.Spinner;
  */
 public class AddMedia extends SharedActivity {
 
-	// Spinner
+	// GUI Elemente
+	private EditText etBarcode;
+	private EditText etTitle;
+	private EditText etAuthor;
 	private Spinner spMediatype;
+	private Button btSave;
+	private ArrayAdapter<CharSequence> spinnerAdapter;
 
 	// Intent extra namen
 	public static final String BARCODE = "barcode";
@@ -35,21 +40,20 @@ public class AddMedia extends SharedActivity {
 
 		Intent in = getIntent();
 		if (in.getStringExtra(BARCODE) != null) {
-			EditText etBarcode = (EditText) findViewById(R.id.etBarcode);
+			etBarcode = (EditText) findViewById(R.id.etBarcode);
 			etBarcode.setText(in.getStringExtra(BARCODE));
 		}
 		if (in.getStringExtra(TITLE) != null) {
-			EditText etTitle = (EditText) findViewById(R.id.etTitle);
+			etTitle = (EditText) findViewById(R.id.etTitle);
 			etTitle.setText(in.getStringExtra(TITLE));
 		}
 		if (in.getStringExtra(AUTHOR) != null) {
-			EditText etAuthor = (EditText) findViewById(R.id.etAuthor);
+			etAuthor = (EditText) findViewById(R.id.etAuthor);
 			etAuthor.setText(in.getStringExtra(AUTHOR));
 		}
 		if (in.getStringExtra(TYPE) != null) {
 			Log.i("log", "ungleich null");
 			spMediatype.setEnabled(false);
-			ArrayAdapter<CharSequence> spinnerAdapter;
 			spinnerAdapter = new ArrayAdapter<CharSequence>(this,
 					android.R.layout.simple_spinner_item);
 			spinnerAdapter.add(in.getStringExtra(TYPE));
@@ -58,15 +62,15 @@ public class AddMedia extends SharedActivity {
 		if(in.getStringExtra(TYPE) == null) {
 			// wenn kein typ durch die aufrufende activity uebergeben wurde dann
 			// wird der spinner mit allen verfuegbaren medientypen gefuellt
-			ArrayAdapter<CharSequence> adapter = ArrayAdapter
+			spinnerAdapter = ArrayAdapter
 					.createFromResource(this, R.array.mediatypes,
 							android.R.layout.simple_spinner_item);
-			adapter
+			spinnerAdapter
 					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			spMediatype.setAdapter(adapter);
+			spMediatype.setAdapter(spinnerAdapter);
 		}
 		// Button zum Speichern des Mediums
-		Button btSave = (Button) findViewById(R.id.btSave);
+		btSave = (Button) findViewById(R.id.btSave);
 		btSave.setOnClickListener(new AddMediaListener(this));
 	}
 }

@@ -2,7 +2,6 @@ package local.mediamanager.view;
 
 import java.util.HashMap;
 
-import local.mediamanager.R;
 import local.mediamanager.model.Media;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
@@ -12,8 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,16 +23,30 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class SendSMS extends SharedActivity {
 
-	// Beschriftungen der GUI und dessen Elemente
+	// GUI Elemente
+	private LinearLayout layout;
+	private TextView tvSelectPhoneNumber;
+	private RadioGroup radioGroup;
+	private RadioButton rbPhoneNumber;
+	private TextView tvMessage;
+	private EditText etMessage;
+	private LinearLayout.LayoutParams etMessageWeight;
+	private Button btSend;
+
+	// Beschriftungen der GUI und Fehlermeldungsdialoge
 	private final String TEXTVIEW_SELECT_TEL_NUMBER_TITLE = "Wählen sie eine Telefonnummer"
 			+ " aus:";
 	private final String TEXTVIEW_SMS_TEXT_TITLE = "Nachricht:";
 	private final String CAPTION_BUTTON_SEND_SMS = "SMS senden";
 	
+	// Nachrichten an den Benutzer
+	final String NO_TEL_NUMBER = "Für diesen Kontakt ist keine "
+			+ "Telefonnummer angegeben.";
+	final String MEDIA_IS_AVAILABLE = "Es ist nicht möglich eine SMS"
+			+ " zu senden, da das Medium weder verliehen noch entliehen ist.";
+
 	// Name der Intent Eigenschaft
 	public static final String MEDIA_POS = "mediaPos";
-	private static final int MENU_ABOUT = 0;
-	private static final int MENU_BACK = 1;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,8 +86,6 @@ public class SendSMS extends SharedActivity {
 			// alert dialog - fuer den Kontakt ist keine Telefonnummer
 			// hinterlegt
 			else {
-				final String NO_TEL_NUMBER = "Für diesen Kontakt ist keine "
-						+ "Telefonnummer angegeben.";
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setMessage(NO_TEL_NUMBER).setCancelable(false)
 						.setNeutralButton("Ok",
@@ -92,8 +101,6 @@ public class SendSMS extends SharedActivity {
 		}
 		// Medium ist weder verliehen noch entliehen
 		else {
-			final String MEDIA_IS_AVAILABLE = "Es ist nicht möglich eine SMS"
-					+ " zu senden, da das Medium weder verliehen noch entliehen ist.";
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setMessage(MEDIA_IS_AVAILABLE).setCancelable(false)
 					.setNeutralButton("Ok",
@@ -125,19 +132,19 @@ public class SendSMS extends SharedActivity {
 		final HashMap<String, String> phoneNumbers = numbers;
 
 		// Layout
-		LinearLayout layout = new LinearLayout(this);
+		layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 		// Telefonnummer
-		TextView tvSelectPhoneNumber = new TextView(this);
+		tvSelectPhoneNumber = new TextView(this);
 		tvSelectPhoneNumber.setText(TEXTVIEW_SELECT_TEL_NUMBER_TITLE);
-		final RadioGroup radioGroup = new RadioGroup(this);
+		radioGroup = new RadioGroup(this);
 		// die counter Variable wird der RadioButton ID zugewiesen, dh z.b. der
 		// zweite RadioButton hat die ID 2
 		int idCounter = 0;
 		// je nachdem wieviele Telefonnummern der Kontakt hat, soviele
 		// RadioButtons gibt es zur Auswahl
 		for (String key : phoneNumbers.keySet()) {
-			RadioButton rbPhoneNumber = new RadioButton(this);
+			rbPhoneNumber = new RadioButton(this);
 			rbPhoneNumber.setText(key);
 			rbPhoneNumber.setId(idCounter);
 			radioGroup.addView(rbPhoneNumber);
@@ -146,13 +153,13 @@ public class SendSMS extends SharedActivity {
 		// die erste Tel. Nummer wird per default gecheckt
 		radioGroup.check(0);
 		// Nachrichtentext
-		TextView tvMessage = new TextView(this);
+		tvMessage = new TextView(this);
 		tvMessage.setText(TEXTVIEW_SMS_TEXT_TITLE);
 		// Eingabefeld fuer die SMS Nachricht
-		final EditText etMessage = new EditText(this);
+		etMessage = new EditText(this);
 		// setzt ein LayoutParams mit weight = 1 (by default haben alle GUI
 		// elemente 0)...
-		LinearLayout.LayoutParams etMessageWeight = new LinearLayout.LayoutParams(
+		etMessageWeight = new LinearLayout.LayoutParams(
 				LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, 1);
 		// ...das Eingabefeld der SMS Nachricht mit der weight = 1 nimmt die
 		// gesamte zur Verfuegung stehende hoehe des Fensters ein (je nachdem ob
@@ -163,9 +170,9 @@ public class SendSMS extends SharedActivity {
 		etMessage.setGravity(Gravity.TOP);
 		etMessage.setText(smsText);
 		// SMS Senden Button
-		Button btNext = new Button(this);
-		btNext.setText(CAPTION_BUTTON_SEND_SMS);
-		btNext.setOnClickListener(new OnClickListener() {
+		btSend = new Button(this);
+		btSend.setText(CAPTION_BUTTON_SEND_SMS);
+		btSend.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 				// die ID des RadioButtons welcher gecheckt wurde wird ermittelt
 				int checkedRadioButtonID = radioGroup.getCheckedRadioButtonId();
@@ -190,7 +197,7 @@ public class SendSMS extends SharedActivity {
 		layout.addView(radioGroup);
 		layout.addView(tvMessage);
 		layout.addView(etMessage);
-		layout.addView(btNext);
+		layout.addView(btSend);
 		this.setContentView(layout);
 	}
 
@@ -220,36 +227,5 @@ public class SendSMS extends SharedActivity {
 					+ "] bis zum [DATUM EINTRAGEN] ausleihen.";
 		}
 		return message;
-	}
-	
-	/* Creates the menu items */
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    menu.add(0, MENU_ABOUT, 0, "Info").setIcon(R.drawable.about);
-	    menu.add(0, MENU_BACK, 0, "Zurück").setIcon(R.drawable.end);
-	    return true;
-	}
-
-	/* Handles item selections */
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    case MENU_ABOUT:
-	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    	builder.setIcon(R.drawable.icon);
-	    	builder.setTitle("Über MediaManager 1.0");
-	    	builder.setMessage("(c) 2010 by \n- Jörg Langner \n- Andreas Wiedemann \n\n" + "http://code.google.com/p/android-mediamanager");
-	    	builder.setCancelable(false);
-	    	builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-	    				public void onClick(DialogInterface dialog, int id) {
-	    					dialog.cancel();
-	    	           }
-	    	       });
-	    	AlertDialog alert = builder.create();
-	    	alert.show();
-	        return true;
-	    case MENU_BACK:
-	        this.finish();
-	        return true;
-	    }
-	    return false;
 	}
 }

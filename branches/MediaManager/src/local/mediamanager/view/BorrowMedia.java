@@ -18,9 +18,11 @@ import android.widget.Spinner;
  */
 public class BorrowMedia extends SharedActivity {
 
-	// Spinner
+	// GUI Elemente
 	private Spinner spMediatype;
 	private Spinner spLegalOwner;
+	private Button btBorrowSave;
+	
 
 	// Intent extra namen
 	public static final String BARCODE = "barcode";
@@ -54,7 +56,7 @@ public class BorrowMedia extends SharedActivity {
 		spLegalOwner.setAdapter(contactAdapter);
 
 		// Button zum speichern des Mediums
-		Button btBorrowSave = (Button) findViewById(R.id.btBorrowSave);
+		btBorrowSave = (Button) findViewById(R.id.btBorrowSave);
 		btBorrowSave.setOnClickListener(new BorrowMediaListener(this));
 	}
 }
