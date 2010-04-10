@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="@string/add_media" 
+            android:text="@string/tvAddMedia" 
             android:drawableLeft="@drawable/add"
             android:height="65px"/>
 
@@ -26,7 +26,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="fill" 
-            android:text="@string/show_media"
+            android:text="@string/tvShowMedia"
             android:drawableLeft="@drawable/show"
             android:height="65px"/>
 
@@ -34,7 +34,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="@string/lend_media" 
+            android:text="@string/tvLendMedia" 
             android:drawableLeft="@drawable/borrow"
             android:height="65px"/>
 
@@ -42,7 +42,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="@string/borrow_media" 
+            android:text="@string/tvBorrowMedia" 
             android:drawableLeft="@drawable/lend"
             android:height="65px"/>
 
@@ -50,7 +50,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="fill"
-            android:text="@string/give_media_back"
+            android:text="@string/tvGiveMediaBack"
             android:drawableLeft="@drawable/back"
             android:height="65px"/>
 
