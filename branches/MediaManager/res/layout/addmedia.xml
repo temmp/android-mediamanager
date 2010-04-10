@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<ScrollView android:id="@+id/ScrollView01" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
              android:padding="10px"
              android:orientation="vertical">
 
-	<TextView 	android:text="@string/add_media"	
+	<TextView 	android:text="@string/tvAddMedia"	
 				android:textStyle="bold"			
 				android:layout_width="fill_parent" 
 				android:layout_height="wrap_content" 
@@ -48,7 +49,7 @@
 
 	<Spinner 	android:id="@+id/spMediatype" 
 				android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" />
+				android:layout_height="wrap_content"/>
 
 	<Button 	android:id="@+id/btSave" 
 				android:text="@string/btSave"				
@@ -56,3 +57,4 @@
 				android:layout_height="wrap_content" />
 				
 </LinearLayout>
+</ScrollView>

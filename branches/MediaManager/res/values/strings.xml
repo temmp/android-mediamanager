@@ -2,11 +2,11 @@
 <resources>    
     <string name="app_name">MediaManager 1.0</string>
 	
-	<string name="add_media">Medium anlegen</string>
-	<string name="borrow_media">Medium entleihen</string>
-	<string name="lend_media">Medium verleihen</string>
-	<string name="show_media">Medien anzeigen</string>
-	<string name="give_media_back">Medium zurückmelden</string><string name="tvBarcode">Barcode:</string>
+	<string name="tvAddMedia">Medium anlegen</string>
+	
+	<string name="tvLendMedia">Medium verleihen</string>
+	<string name="tvShowMedia">Medien anzeigen</string>
+	<string name="tvBarcode">Barcode:</string>
 	<string name="tvTitle">Medientitel:</string>
 	<string name="tvAuthor">Medienautor:</string>
 	<string name="tvMediatype">Medientyp:</string>
@@ -15,7 +15,7 @@
 	<string name="tvMedia">Medium:</string>
 	<string name="tvLendto">Medium entleihen an:</string>
 	<string name="tvLendtime">Medium entleihen bis:</string>
-	<string name="tvBorrowMedia">Entliehenes Medium anlegen</string>
+	<string name="tvBorrowMedia">Medium entleihen</string>
 	<string name="tvBorrowtime">Medium enleihen bis:</string>
 	<string name="tvGiveMediaBack">Medium zurückmelden</string><string name="btSave">Neues Medium anlegen</string>
 	<string name="btLendmedia">Medium verleihen</string>
