@@ -16,7 +16,7 @@
 					android:layout_gravity="center" 
 					android:textStyle="bold"
 					android:paddingTop="10px" 
-					android:paddingBottom="10px" />
+					android:paddingBottom="10px" android:gravity="center"/>
 	
 		<TextView 	android:text="@string/tvMedia" 
 					android:layout_width="fill_parent" 

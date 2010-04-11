@@ -15,7 +15,7 @@
 					android:layout_height="wrap_content" 
 					android:layout_gravity="center"
 					android:paddingTop="10px" 
-					android:paddingBottom="10px" />
+					android:paddingBottom="10px" android:gravity="center"/>
 		
 		<TextView 	android:text="@string/tvBarcode"
 					android:layout_width="fill_parent" 
