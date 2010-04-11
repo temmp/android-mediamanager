@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import local.mediamanager.R;
 import local.mediamanager.model.Media;
+import local.mediamanager.util.Calendar;
 import local.mediamanager.util.Contact;
 import local.mediamanager.util.Date;
 import local.mediamanager.util.xml.XMLMediaFileEditor;
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -63,6 +65,15 @@ public class BorrowMediaListener implements OnClickListener {
 		// Medium wird hinzugefuegt
 		XMLMediaFileEditor xmlEditor = new XMLMediaFileEditor(activity);
 		xmlEditor.addMedia(media);
+		// Kalendereintrag erstellen falls die Checkbox gecheckt ist
+		CheckBox calenderEntry = (CheckBox) activity
+				.findViewById(R.id.cbCalEntry);
+		if (calenderEntry.isChecked()) {
+			Calendar calendar = new Calendar(activity);
+			calendar.addCalendarEntry(dpBorrowtime.getYear(), dpBorrowtime
+					.getMonth() + 1, dpBorrowtime.getDayOfMonth(), etTitle
+					.getText().toString());
+		}
 		// Nachricht des erfolgreichen Anlegens des Mediums an Benutzer
 		Context context = activity.getApplicationContext();
 		Toast.makeText(context, MEDIA_SUCCESSFULLY_ADDED, Toast.LENGTH_SHORT)
