@@ -53,12 +53,17 @@
 		<EditText 	android:layout_width="fill_parent" 
 					android:layout_height="wrap_content" 
 					android:id="@+id/etMediatype" />
+					
+		<LinearLayout   android:layout_width="fill_parent"
+			         	android:layout_height="fill_parent"
+			            android:orientation="vertical" 
+			            android:paddingTop="20px" >
 	
-		<Button		android:id="@+id/btGiveMediaBack"
-					android:text="@string/btGiveMediaBack"					
-					android:layout_width="fill_parent" 
-					android:layout_height="wrap_content" 
-					android:paddingTop="10px" />
-	
+			<Button		android:id="@+id/btGiveMediaBack"
+						android:text="@string/btGiveMediaBack"					
+						android:layout_width="fill_parent" 
+						android:layout_height="wrap_content" />
+						
+		</LinearLayout>
 	</LinearLayout>
 </ScrollView>
