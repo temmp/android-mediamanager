@@ -72,12 +72,23 @@
 		<DatePicker	android:id="@+id/dpBorrowtime" 
 					android:layout_width="fill_parent" 
 					android:layout_height="wrap_content" 
-					android:paddingBottom="20px"/>
-	
-		<Button 	android:text="@string/btBorrowSave" 
-					android:id="@+id/btBorrowSave" 
-					android:layout_width="fill_parent" 
-					android:layout_height="wrap_content" />
+					android:paddingBottom="10px"/>
 					
+		<CheckBox 	android:text="@string/cbCalEntry" 
+					android:id="@+id/cbCalEntry" 
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"/>
+					
+		<LinearLayout   android:layout_width="fill_parent"
+			         	android:layout_height="fill_parent"
+			            android:orientation="vertical" 
+			            android:paddingTop="20px" >
+	
+			<Button 	android:text="@string/btBorrowSave" 
+						android:id="@+id/btBorrowSave" 
+						android:layout_width="fill_parent" 
+						android:layout_height="wrap_content" />
+						
+		</LinearLayout>
 	</LinearLayout>
 </ScrollView>

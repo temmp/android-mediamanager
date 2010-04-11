@@ -46,10 +46,22 @@
 					android:layout_width="fill_parent" 
 					android:layout_height="wrap_content" 
 					android:paddingBottom="10px" />
-	
-		<Button 	android:text="@string/btLendmedia" 
-					android:id="@+id/btLendmedia" 
+					
+		<CheckBox 	android:text="@string/cbCalEntry" 
+					android:id="@+id/cbCalEntry" 
 					android:layout_width="fill_parent" 
-					android:layout_height="wrap_content" />	
+					android:layout_height="wrap_content"/>
+		
+		<LinearLayout   android:layout_width="fill_parent"
+			         	android:layout_height="fill_parent"
+			            android:orientation="vertical" 
+			            android:paddingTop="20px" >
+	
+			<Button 	android:text="@string/btLendmedia" 
+						android:id="@+id/btLendmedia" 
+						android:layout_width="fill_parent" 
+						android:layout_height="wrap_content" />
+		
+		</LinearLayout>	
 	</LinearLayout>
 </ScrollView>
