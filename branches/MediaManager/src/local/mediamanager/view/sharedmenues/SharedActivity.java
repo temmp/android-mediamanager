@@ -14,6 +14,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+/**
+ * Gemeinsame Menueoptionen fuer alle Activities des MediaManagers.
+ * 
+ * @author Joerg Langner
+ */
 public class SharedActivity extends Activity {
 
 	// Menu Optionen
@@ -66,7 +71,7 @@ public class SharedActivity extends Activity {
 				}
 			});
 			layout.addView(content);
-			layout.addView(link);			
+			layout.addView(link);
 			layout.addView(btOK);
 			dialog.setContentView(layout);
 			dialog.setOwnerActivity(this);
