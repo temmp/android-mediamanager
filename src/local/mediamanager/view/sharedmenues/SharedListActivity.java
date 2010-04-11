@@ -13,7 +13,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+/**
+ * Gemeinsame Menueoptionen fuer alle ListActivities des MediaManagers.
+ * 
+ * @author Joerg Langner
+ */
 public class SharedListActivity extends ListActivity {
 
 	// Menu Optionen

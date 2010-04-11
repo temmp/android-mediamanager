@@ -9,6 +9,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Erstellt den Dialog ob ein Medium manuell oder per scannen angelegt,
+ * verliehen, entliehen oder zurueckgemeldet werden soll. 
+ * 
+ * @author Joerg Langner
+ */
 public class MediaManagerSharedDialog {
 
 	private Dialog dialog;

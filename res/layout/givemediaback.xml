@@ -1,59 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView android:id="@+id/ScrollView01" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" xmlns:android="http://schemas.android.com/apk/res/android" android:layout_gravity="clip_vertical">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:padding="10px"
-             android:orientation="vertical">
-
-	<TextView 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" 
-				android:layout_gravity="center" 
-				android:textStyle="bold" 
-				android:text="@string/tvGiveMediaBack"
-				android:paddingTop="10px" 
-				android:paddingBottom="10px" />
-
-	<TextView 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" 
-				android:text="@string/tvBarcode" />
-
-	<EditText 	android:id="@+id/etBarcode" 
-				android:layout_width="fill_parent" 
-				android:layout_height="wrap_content"  
-				android:inputType="number|numberDecimal" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent" 
+			android:orientation="vertical" 				 
+			android:layout_gravity="clip_vertical">
 				
-	<TextView 	android:text="@string/tvTitle" 
-				android:layout_width="fill_parent" 
-				android:layout_height="wrap_content"
-				android:paddingTop="10px" />
-				
-	<EditText 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" 
-				android:id="@+id/etTitle" />
-
-	<TextView 	android:text="@string/tvAuthor" 
-				android:layout_width="fill_parent" 
-				android:layout_height="wrap_content"
-				android:paddingTop="10px" />
-
-	<EditText 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" 
-				android:id="@+id/etAuthor" />
-
-	<TextView 	android:text="@string/tvMediatype" 
-				android:layout_width="fill_parent" 
-				android:layout_height="wrap_content"
-				android:paddingTop="10px" />
+	<LinearLayout   android:layout_width="fill_parent"
+	             	android:layout_height="fill_parent"
+	             	android:padding="10px"
+	             	android:orientation="vertical">
 	
-	<EditText 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content" 
-				android:id="@+id/etMediatype" />
-
-	<Button 	android:layout_width="fill_parent" 
-				android:layout_height="wrap_content"
-				android:text="@string/btGiveMediaBack" 
-				android:id="@+id/btGiveMediaBack" />
-
-</LinearLayout>
+		<TextView 	android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:layout_gravity="center" 
+					android:textStyle="bold" 
+					android:text="@string/tvGiveMediaBack"
+					android:paddingTop="10px" 
+					android:paddingBottom="10px" />
+	
+		<TextView 	android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:text="@string/tvBarcode" />
+	
+		<EditText 	android:id="@+id/etBarcode" 
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"  
+					android:inputType="number|numberDecimal" />
+					
+		<TextView 	android:text="@string/tvTitle" 
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+					android:paddingTop="10px" />
+					
+		<EditText 	android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:id="@+id/etTitle" />
+	
+		<TextView 	android:text="@string/tvAuthor" 
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+					android:paddingTop="10px" />
+	
+		<EditText 	android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:id="@+id/etAuthor" />
+	
+		<TextView 	android:text="@string/tvMediatype" 
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content"
+					android:paddingTop="10px" />
+		
+		<EditText 	android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:id="@+id/etMediatype" />
+	
+		<Button		android:id="@+id/btGiveMediaBack"
+					android:text="@string/btGiveMediaBack"					
+					android:layout_width="fill_parent" 
+					android:layout_height="wrap_content" 
+					android:paddingTop="10px" />
+	
+	</LinearLayout>
 </ScrollView>
