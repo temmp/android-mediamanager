@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>    
-    <string name="app_name">MediaManager 1.0</string>
+    <string name="app_name">MediaManager</string>
 	
 	<string name="tvAddMedia">Medium anlegen</string>
 	
