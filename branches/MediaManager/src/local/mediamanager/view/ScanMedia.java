@@ -60,7 +60,7 @@ public class ScanMedia extends SharedActivity {
 									public void onClick(DialogInterface dialog,
 											int id) {
 										setResult(Activity.RESULT_CANCELED);
-										ScanMedia.this.finish();
+										//ScanMedia.this.finish();
 										// jetzt wird die onActivityResult
 										// Methode der aufrufenden
 										// Actitvity aufgerufen
