@@ -6,7 +6,6 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
 
 /**
  * Diese Klasse startet den Scanvorgang. Falls der Barcode Scanner bereits
@@ -112,8 +111,18 @@ public final class ScanIntentIntegrator {
 						try {
 							activity.startActivity(intent);
 						} catch (ActivityNotFoundException e) {
-							Toast.makeText(activity, SCANNER_NOT_FOUND,
-									Toast.LENGTH_SHORT).show();
+							// Scanner im android market nicht gefunden
+							AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+							builder.setMessage(SCANNER_NOT_FOUND).setCancelable(false)
+									.setNeutralButton("Ok",
+											new DialogInterface.OnClickListener() {
+												public void onClick(DialogInterface dialog,
+														int id) {
+													activity.finish();
+												}
+											});
+							AlertDialog alert = builder.create();
+							alert.show();
 						}
 					}
 				});
