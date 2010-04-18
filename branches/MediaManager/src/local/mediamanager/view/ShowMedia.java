@@ -279,7 +279,7 @@ public class ShowMedia extends SharedListActivity {
 		} else if (media.getType().equals(Media.TYPE.MOVIE.getName())) {
 			image.setImageResource(R.drawable.media_movie);
 		} else if (media.getType().equals(Media.TYPE.VIDEO_GAMES.getName())) {
-			image.setImageResource(R.drawable.media_game);
+			image.setImageResource(R.drawable.media_videogame);
 		} else if (media.getType().equals(Media.TYPE.MAGAZINES.getName())) {
 			image.setImageResource(R.drawable.media_magazine);
 		}
