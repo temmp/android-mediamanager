@@ -64,7 +64,7 @@ public class LendMediaScanListener implements OnClickListener {
 		if (calenderEntry.isChecked()) {
 			Calendar calendar = new Calendar(activity);
 			calendar.addCalendarEntry(dpLendtime.getYear(), dpLendtime
-					.getMonth() + 1, dpLendtime.getDayOfMonth(), media
+					.getMonth(), dpLendtime.getDayOfMonth(), media
 					.getTitle());
 		}
 		// nachricht an Benutzer das medium erfolgreich

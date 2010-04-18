@@ -71,7 +71,7 @@ public class BorrowMediaListener implements OnClickListener {
 		if (calenderEntry.isChecked()) {
 			Calendar calendar = new Calendar(activity);
 			calendar.addCalendarEntry(dpBorrowtime.getYear(), dpBorrowtime
-					.getMonth() + 1, dpBorrowtime.getDayOfMonth(), etTitle
+					.getMonth(), dpBorrowtime.getDayOfMonth(), etTitle
 					.getText().toString());
 		}
 		// Nachricht des erfolgreichen Anlegens des Mediums an Benutzer

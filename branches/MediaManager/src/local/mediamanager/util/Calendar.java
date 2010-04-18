@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 /**
  * Erstellt einen Eintrag in den Kalender, dass den Benutzer des MediaManagers

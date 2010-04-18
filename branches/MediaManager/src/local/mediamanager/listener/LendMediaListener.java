@@ -70,7 +70,7 @@ public class LendMediaListener implements OnClickListener {
 		if (calenderEntry.isChecked()) {
 			Calendar calendar = new Calendar(activity);
 			calendar.addCalendarEntry(dpLendtime.getYear(), dpLendtime
-					.getMonth() + 1, dpLendtime.getDayOfMonth(), media
+					.getMonth(), dpLendtime.getDayOfMonth(), media
 					.getTitle());
 		}
 		// Nachricht des erfolgreichen Anlegens des Mediums an Benutzer
