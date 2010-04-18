@@ -125,10 +125,11 @@ public final class ScanIntentIntegrator {
 							alert.show();
 						}
 					}
-				});
+				});		
 		downloadDialog.setNegativeButton(stringButtonNo,
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialogInterface, int i) {
+						activity.finish();
 					}
 				});
 		downloadDialog.show();
