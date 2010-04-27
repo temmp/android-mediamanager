@@ -5,4 +5,11 @@
  * Edit already createt media
  * Enter ISBN manually and request information over AWS
  * List media by categories (books, audio, etc.)
- * Show book or cd cover in detail view
+ * Show book or cd cover in detail view and list view
+ * Different accounts (private, university, ...)
+ * Search in view mode
+ * List rotation in view mode
+ * Export and import functionality
+ * Only stored contacts in contact list
+ * Possibility to select calendar for reminders
+ * Lend media by long click in view mode
