@@ -1,13 +1,7 @@
-#summary One-sentence summary of this page.
+#summary Page to collect and list planed features for future versions of the MediaManager.
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= Requested and planed features =
+* Edit already createt media
+* Enter ISBN manually and request information over AWS
+* List media by categories (books, audio, etc.)
+* Show book or cd cover in detail view
