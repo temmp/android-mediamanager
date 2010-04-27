@@ -1,4 +1,5 @@
 #summary Page to collect and list planed features for future versions of the MediaManager.
+#labels Featured
 
 = Requested and planed features =
  * Edit already createt media
