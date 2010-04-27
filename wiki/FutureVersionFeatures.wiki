@@ -14,3 +14,5 @@
  * sort contacts from a to z
  * Possibility to select calendar for reminders
  * Lend media by long click in view mode
+ * Show band or interpreter of CDs
+ * Design view mode more "smooth and pretty"
