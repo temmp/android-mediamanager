@@ -16,3 +16,4 @@
  * Lend media by long click in view mode
  * Show band or interpreter of CDs
  * Design view mode more "smooth and pretty"
+ * E-Mail, InstantMessaging, Call
