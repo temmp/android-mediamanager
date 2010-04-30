@@ -8,13 +8,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
+/**
+ * Listener wenn ein Medium per Scannen zurueckgemeldet werden soll. Meldet das
+ * Medium zurueck.
+ * 
+ * @author Joerg Langner
+ */
 public class GiveMediaBackScanListener implements OnClickListener {
 
 	private Activity activity;
 	private String barcode;
 
-	private final String MEDIA_SUCCESSFULLY_SET_BACK = "Medium erfolgreich " +
-			"zurückgemeldet.";
+	private final String MEDIA_SUCCESSFULLY_SET_BACK = "Medium erfolgreich "
+			+ "zurückgemeldet.";
 
 	public GiveMediaBackScanListener(Activity activity, String barcode) {
 		this.activity = activity;
@@ -25,7 +31,7 @@ public class GiveMediaBackScanListener implements OnClickListener {
 	public void onClick(View arg0) {
 		XMLMediaFileEditor parser = new XMLMediaFileEditor(activity);
 		Media media = parser.getMediaByBarcode(barcode);
-		
+
 		// es muss unterschieden werden ob das Medium verliehen oder entliehen
 		// ist
 		if (media.getStatus().equals(Media.STATUS.VERLIEHEN.getName())) {
@@ -45,11 +51,12 @@ public class GiveMediaBackScanListener implements OnClickListener {
 			// entliehen sind, nicht gespeichert werden
 			parser.removeMediaByBarcode(media.getBarcode());
 		}
-		
+
 		// Nachricht an Benutzer das Medium erfolgreich zurückgemeldet wurde
 		Context context = activity.getApplicationContext();
-		Toast.makeText(context, MEDIA_SUCCESSFULLY_SET_BACK, Toast.LENGTH_SHORT)
-				.show();
+		Toast
+				.makeText(context, MEDIA_SUCCESSFULLY_SET_BACK,
+						Toast.LENGTH_SHORT).show();
 		// activity wird geschlossen
 		activity.finish();
 	}

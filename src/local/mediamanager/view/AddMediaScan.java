@@ -18,7 +18,7 @@ import android.widget.Spinner;
 
 /**
  * Activity zum Anlegen eines Mediums per Scannen. Mit dem eingescannten Barcode
- * wird ein ItemLookup bei Amazon gemacht und die ermittelten Werte in die GUi
+ * wird ein ItemLookup bei Amazon gemacht und die ermittelten Werte in die GUI
  * eingetragen. Der Benutzer braucht dann nur noch den Button zum anlegen des
  * Mediums druecken.
  * 

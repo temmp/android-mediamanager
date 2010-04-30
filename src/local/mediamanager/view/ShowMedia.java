@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
-//TODO eigene listview ohne von listact zu erben?
 /**
  * GUI für die Anzeige der Medien. Es besteht aus einem Spinner (durch den die
  * Medienliste gefiltert wird) und der eigentliche Liste (die die Medien

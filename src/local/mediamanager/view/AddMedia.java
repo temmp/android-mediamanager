@@ -5,7 +5,6 @@ import local.mediamanager.listener.AddMediaListener;
 import local.mediamanager.view.sharedmenues.SharedActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,7 +50,6 @@ public class AddMedia extends SharedActivity {
 			etAuthor.setText(in.getStringExtra(AUTHOR));
 		}
 		if (in.getStringExtra(TYPE) != null) {
-			Log.i("log", "ungleich null");
 			spMediatype.setEnabled(false);
 			spinnerAdapter = new ArrayAdapter<CharSequence>(this,
 					android.R.layout.simple_spinner_item);

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>    
-    <string name="app_name">MediaManager</string>
-	
-	<string name="tvAddMedia">Medium anlegen</string>
-	
+<resources>  
+    <string name="app_name">MediaManager</string>	
+	<string name="tvAddMedia">Medium anlegen</string>	
 	<string name="tvLendMedia">Medium verleihen</string>
 	<string name="tvShowMedia">Medien anzeigen</string>
 	<string name="tvBarcode">Barcode:</string>
@@ -17,19 +15,17 @@
 	<string name="tvLendtime">Medium entleihen bis:</string>
 	<string name="tvBorrowMedia">Medium entleihen</string>
 	<string name="tvBorrowtime">Medium enleihen bis:</string>
-	<string name="tvGiveMediaBack">Medium zurückmelden</string><string name="btSave">Neues Medium anlegen</string>
+	<string name="tvGiveMediaBack">Medium zurückmelden</string>
+	<string name="btSave">Neues Medium anlegen</string>
 	<string name="btLendmedia">Medium verleihen</string>
 	<string name="btBorrowSave">Entliehenes Medium anlegen</string>
-	<string name="btManually">Manuell</string><string name="btScan">Scannen</string><string name="btGiveMediaBack">Medium zurückmelden</string><string name="spMediatype">Wähle einen Typ</string>
+	<string name="btManually">Manuell</string>
+	<string name="btScan">Scannen</string>
+	<string name="btGiveMediaBack">Medium zurückmelden</string>
+	<string name="spMediatype">Wähle einen Typ</string>
 	<string name="spMedia">Wähle ein Medium</string>
 	<string name="spLendto">Wähle einen Kontakt</string>
 	<string name="spLegalOwner">Wähle einen Kontakt</string>
 	<string name="spFilter">Wähle einen Filter</string>
-
-
-
-
-
-
-<string name="cbCalEntry">Kalendereintrag erstellen</string>
+	<string name="cbCalEntry">Kalendereintrag erstellen</string>
 </resources>

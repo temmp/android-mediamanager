@@ -8,7 +8,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
+/**
+ * Die Klasse leitet das Scannen eines Mediums ein.
+ * 
+ * @author Joerg Langner
+ */
 public class ScanMedia extends SharedActivity {
 
 	/**
