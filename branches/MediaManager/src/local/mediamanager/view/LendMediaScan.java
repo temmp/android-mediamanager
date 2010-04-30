@@ -55,7 +55,7 @@ public class LendMediaScan extends SharedActivity {
 		 startActivityForResult(in, SCAN_REQUEST_CODE);
 		// Test fuer Emulator
 //		onActivityResult(SCAN_REQUEST_CODE, Activity.RESULT_OK, new Intent()
-//				.putExtra("barcode", "111"));
+//				.putExtra("barcode", "4042564096545"));
 	}
 
 	/*

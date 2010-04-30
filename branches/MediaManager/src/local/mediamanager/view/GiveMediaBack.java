@@ -21,7 +21,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 /**
- * GUI fuer das manuelle Zurückmelden eines Mediums. Zeigt eine Liste an mit
+ * GUI fuer das manuelle Zurückmelden eines Mediums. Zeigt eine Liste mit
  * allen verliehenen und entliehenen Medien. Bei der Auswahl eines Mediums wird
  * ein Dialog angezeigt ob der Benutzer dieses Medium zurueckmelden moechte.
  * 
@@ -34,7 +34,7 @@ public class GiveMediaBack extends SharedListActivity {
 	private TextView headerText;
 
 	// Beschriftungen
-	private final String HEADER_TEXT = "<b>Wählen Sie das Medium aus welches"
+	private final String HEADER_TEXT = "<b>Wählen Sie das Medium aus, welches"
 			+ " Sie zurückmelden möchten<b>";
 
 	// Nachricht an Benutzer wenn medium zurueckgemeldet wurde

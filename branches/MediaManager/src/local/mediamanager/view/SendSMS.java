@@ -21,6 +21,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.LinearLayout.LayoutParams;
 
+/**
+ * Erstellt die GUI zum Versenden einer SMS. Anhand des Medium wird der Kontakt
+ * ermittelt an welchen eine SMS geschrieben werden soll. Ist fuer den Kontakt
+ * nicht mindestens eine Telefonnummer hinterlegt so bekommt der Benutzer eine
+ * entsprechende Fehlermeldung. Die GUI besteht aus einer dynamischen Anzahl an
+ * RadioButtons zur Auswahl der Telefonummer (je nach dem wieviele
+ * Telefonnummern fuer den Kontakt hinterlegt sind). Zudem besteht es aus einem
+ * Textfeld in welchem die SMS Nachricht steht die versendet werden soll.
+ * 
+ * @author Joerg Langner
+ */
 public class SendSMS extends SharedActivity {
 
 	// GUI Elemente
@@ -38,7 +49,7 @@ public class SendSMS extends SharedActivity {
 			+ " aus:";
 	private final String TEXTVIEW_SMS_TEXT_TITLE = "Nachricht:";
 	private final String CAPTION_BUTTON_SEND_SMS = "SMS senden";
-	
+
 	// Nachrichten an den Benutzer
 	final String NO_TEL_NUMBER = "Für diesen Kontakt ist keine "
 			+ "Telefonnummer angegeben.";

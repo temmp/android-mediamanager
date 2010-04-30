@@ -15,8 +15,7 @@ public class Calendar {
 	private Activity activity;
 
 	public Calendar(Activity activity) {
-		this.activity = activity;
-	}
+		this.activity = activity;	}
 
 	public void addCalendarEntry(int year, int month, int day, String title) {
 		Uri calendars = Uri.parse("content://calendar/calendars");

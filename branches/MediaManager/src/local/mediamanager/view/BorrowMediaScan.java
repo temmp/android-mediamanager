@@ -21,9 +21,9 @@ import android.widget.Spinner;
  * Activity zum Entleihen eines Mediums per Scannen. Mit dem eingescannten
  * Barcode wird ein ItemLookup bei Amazon gemacht. Wurde das Medium von Amazon
  * gefunden werden die ermittelten Informationen ueber das Medium in die GUI
- * eingetragen. Wird das MEdium nicht von Amazon gefunden so wird die
- * BorrowMedia Activity aufgerufen in welche die Medieninformationen selber per
- * Hand eingetragen werden muessen.
+ * eingetragen. Wurde das Medium nicht von Amazon gefunden so wird die
+ * BorrowMedia Activity aufgerufen in welcher die Medieninformationen vom
+ * Benutzer per Hand eingetragen werden muessen.
  * 
  * @author Joerg Langner
  */

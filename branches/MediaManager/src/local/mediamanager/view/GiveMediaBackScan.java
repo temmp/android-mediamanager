@@ -14,13 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Scannt ein Medium. Wenn der Barcode im MediaManager gefunden wurde und das
- * Medium verliehen oder entliehen ist dann werden alle Informationen in die GUI
- * Elemente eingetragen (Barcode, Titel etc.) und der Benutzer kann ueber den
- * Button "Medium zurückmelden" selbiges tun. Falls das Medium nicht gefunden
- * wurde oder das Medium weder verliehen noch entliehen ist dann kann es nicht
- * zurueckgemeldet werden. In diesen Fällen bekommt der Benutzer eine
- * Fehlermeldung angezeigt.
+ * Scannt ein Medium welches zurueckgemeldet werden soll. Wenn der Barcode im
+ * MediaManager gefunden wurde und das Medium verliehen oder entliehen ist dann
+ * werden alle Informationen in die GUI Elemente eingetragen (Barcode, Titel
+ * etc.) und der Benutzer kann ueber den Button "Medium zurückmelden" selbiges
+ * tun. Falls das Medium nicht gefunden wurde oder das Medium weder verliehen
+ * noch entliehen ist dann kann es nicht zurueckgemeldet werden. In diesen
+ * Fällen bekommt der Benutzer eine Fehlermeldung angezeigt.
  * 
  * @author default
  */

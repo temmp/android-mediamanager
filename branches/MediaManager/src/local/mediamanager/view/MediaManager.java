@@ -15,16 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-//TODO Test> progress beim connecten und parsen
-//TODO Calender einbauen..was ist mit Calendereintrag loeschen bei...
-//zurueckmelden? soll der eintrag automatisch erstellt werden?
-//Zudem ist im Calender code eine for schleife die von 0 bis 1 laeuft?
-//TODO zurueckmelden auch ueber scanner ->searchbybarcode vorhanden
-//TODO Test> medium verleiehen ueber scanner->searchbybarcode vorhanden
-// damit auch diese final scheisse weg kommt
-//TODO die laenge der strings vom itemlookup soll nicht die GUI zerschiessen
-//TODO icons in spinner fuer medientyp
-
 /**
  * Dies ist die Einstiegsactivity des MediaManagers. Von hier aus werden alle
  * anderen Activities wie Medium anlegen, verleihen, entleihen ,zurueckmelden
