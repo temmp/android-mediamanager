@@ -11,7 +11,7 @@
  * List rotation in view mode
  * Export and import functionality
  * Only stored contacts in contact list
- * sort contacts from a to z
+ * Sort contacts from a to z
  * Possibility to select calendar for reminders
  * Lend media by long click in view mode
  * Show band or interpreter of CDs
