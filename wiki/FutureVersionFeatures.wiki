@@ -2,7 +2,7 @@
 #labels Featured
 
 = Requested and planed features =
- * Edit already createt media
+ * Edit already created media
  * Enter ISBN manually and request information over AWS
  * List media by categories (books, audio, etc.)
  * Show book or cd cover in detail view and list view
